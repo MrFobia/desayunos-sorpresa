@@ -6,3 +6,6 @@ dist
 
 # Base de datos local: se regenera con `npm run seed`
 server/db.json
+
+# Capturas de trabajo
+.capturas
