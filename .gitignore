@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vite
+
+# Base de datos local: se regenera con `npm run seed`
+server/db.json

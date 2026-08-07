@@ -1,0 +1,82 @@
+/* Hallmark · genre: editorial · macrostructure: Marquee Hero · theme: Atelier (warm)
+ * enrichment: E-interactive WebGL fruit bowl (drag-to-rotate) · nav: N6 masthead · footer: Ft7 newsletter-first
+ * anchor hue: 45 (crema/durazno) · accent: fresa oklch(54% 0.18 25) · secondary: hoja oklch(52% 0.09 145)
+ * Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5
+ *
+ * Fuente única de verdad del sistema: color, tipografía, escala, motion.
+ * Se declara con `@theme static` para que Tailwind v4 genere utilidades
+ * (`bg-paper`, `text-ink`, `font-display`) y además emita todas las variables
+ * en :root, de modo que `var(--color-accent)` funcione en CSS a mano.
+ * Ningún color ni familia tipográfica se escribe fuera de este archivo.
+ */
+
+@theme static {
+  /* --- paper / ink ------------------------------------------------------ */
+  --color-paper: oklch(97% 0.014 70);
+  --color-paper-2: oklch(94.5% 0.018 65);
+  --color-paper-3: oklch(91% 0.026 60);
+  --color-rule: oklch(85% 0.022 55);
+  --color-neutral: oklch(60% 0.022 50);
+  --color-muted: oklch(45% 0.022 45);
+  --color-ink: oklch(24% 0.022 40);
+  --color-ink-deep: oklch(16% 0.02 35);
+
+  /* --- acentos (dos como máximo) ---------------------------------------- */
+  --color-accent: oklch(54% 0.18 25); /* fresa — enlaces, CTA, estados activos */
+  --color-accent-strong: oklch(46% 0.17 25);
+  --color-accent-soft: oklch(90% 0.045 25);
+  --color-leaf: oklch(50% 0.09 145); /* hoja — sólo etiquetas saludables */
+  --color-leaf-soft: oklch(93% 0.03 145);
+  --color-focus: oklch(50% 0.19 25);
+
+  /* --- tipografía ------------------------------------------------------- */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
+
+  --text-xs: 0.78rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 2.9rem;
+  --text-4xl: 3.6rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.75rem, 3.6rem);
+  --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+
+  /* --- espacio (escala 4 pt) -------------------------------------------- */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.5rem;
+  --space-3xl: 5.5rem;
+  --space-4xl: 8rem;
+
+  /* --- reglas, radios, capas -------------------------------------------- */
+  --rule-hair: 1px;
+  --rule-thick: 3px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+
+  /* --- motion ----------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-instant: 90ms;
+  --dur-short: 160ms;
+  --dur-mid: 280ms;
+  --dur-long: 480ms;
+}
