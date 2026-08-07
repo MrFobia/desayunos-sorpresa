@@ -16,7 +16,13 @@ function readLocal(key, fallback) {
 }
 
 export function StoreProvider({ children }) {
-  const [data, setData] = useState({ products: [], addons: [], posts: [], settings: null });
+  const [data, setData] = useState({
+    products: [],
+    addons: [],
+    posts: [],
+    settings: null,
+    stats: null,
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cart, setCart] = useState(() => readLocal(CART_KEY, []));

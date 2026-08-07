@@ -153,18 +153,38 @@
   }
 
   .btn-primary {
-    background: var(--color-ink-deep);
+    background: var(--color-accent);
     color: var(--color-paper);
+    border-color: var(--color-ink);
+    border-width: var(--rule-firm);
+    box-shadow: var(--shadow-hard-sm);
   }
 
   .btn-primary:hover:not(:disabled) {
     background: var(--color-accent-strong);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    box-shadow: none;
+  }
+
+  .btn-ink {
+    background: var(--color-ink-deep);
+    color: var(--color-paper);
+    border-color: var(--color-ink-deep);
+    border-width: var(--rule-firm);
+  }
+
+  .btn-ink:hover:not(:disabled) {
+    background: var(--color-espresso-2);
   }
 
   .btn-ghost {
     background: transparent;
     color: var(--color-ink);
     border-color: var(--color-rule);
+    border-width: var(--rule-firm);
   }
 
   .btn-ghost:hover:not(:disabled) {
@@ -222,6 +242,138 @@
 
   .input[aria-invalid="true"] {
     border-color: var(--color-accent);
+  }
+
+  /* ------------------------------------------------------------- densidad */
+
+  /* Bloque del bento: borde firme, radio grande, recorta su contenido. */
+  .tile {
+    position: relative;
+    overflow: hidden;
+    border: var(--rule-firm) solid var(--color-ink);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+  }
+
+  .tile-dark {
+    background: var(--color-espresso);
+    color: var(--color-paper);
+    border-color: var(--color-ink-deep);
+  }
+
+  .tile-yolk {
+    background: var(--color-yolk);
+    color: var(--color-ink-deep);
+  }
+
+  .tile-accent {
+    background: var(--color-accent);
+    color: var(--color-paper);
+    border-color: var(--color-accent-strong);
+  }
+
+  /* Grano sobre las superficies oscuras: rompe el plano sin degradados. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Etiqueta compacta: la unidad de información de las tarjetas densas. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    white-space: nowrap;
+    background: var(--color-paper-2);
+    color: var(--color-muted);
+    border: var(--rule-hair) solid var(--color-rule);
+  }
+
+  .chip-accent {
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    border-color: transparent;
+  }
+
+  .chip-leaf {
+    background: var(--color-leaf-soft);
+    color: var(--color-leaf);
+    border-color: transparent;
+  }
+
+  .chip-solid {
+    background: var(--color-accent);
+    color: var(--color-paper);
+    border-color: transparent;
+  }
+
+  .chip-ink {
+    background: var(--color-ink-deep);
+    color: var(--color-paper);
+    border-color: transparent;
+  }
+
+  /* Botón de filtro / categoría. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-pill);
+    border: var(--rule-firm) solid var(--color-rule);
+    background: var(--color-paper);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--dur-short) var(--ease-out),
+      border-color var(--dur-short) var(--ease-out),
+      color var(--dur-short) var(--ease-out);
+  }
+
+  .pill:hover {
+    border-color: var(--color-ink);
+  }
+
+  .pill[aria-pressed="true"],
+  .pill[data-active="true"] {
+    background: var(--color-ink-deep);
+    border-color: var(--color-ink-deep);
+    color: var(--color-paper);
+  }
+
+  /* Carrusel horizontal con snap; en escritorio se convierte en rejilla. */
+  .rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(15rem, 1fr);
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-xs);
+    scrollbar-width: thin;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+  }
+
+  /* Barra de acciones pegada al pie en móvil. */
+  .dock {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-sticky);
+    border-top: var(--rule-firm) solid var(--color-ink);
+    background: color-mix(in oklab, var(--color-paper) 94%, transparent);
+    backdrop-filter: blur(8px);
   }
 
   /* ----------------------------------------------------------------- link */

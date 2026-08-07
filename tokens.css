@@ -1,7 +1,11 @@
-/* Hallmark · genre: editorial · macrostructure: Marquee Hero · theme: Atelier (warm)
- * enrichment: E-interactive WebGL fruit bowl (drag-to-rotate) · nav: N6 masthead · footer: Ft7 newsletter-first
- * anchor hue: 45 (crema/durazno) · accent: fresa oklch(54% 0.18 25) · secondary: hoja oklch(52% 0.09 145)
- * Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5
+/* Hallmark · genre: editorial · macrostructure: Bento Grid · theme: Atelier (warm, high-contrast v2)
+ * enrichment: E-interactive WebGL fruit bowl (drag-to-rotate) · nav: N11 mega-menú · footer: Ft4 colofón denso
+ * anchor hue: 45 (crema/durazno) · accent: fresa oklch(54% 0.18 25) · secondary: hoja oklch(50% 0.09 145)
+ * Hallmark · pre-emit critique: P5 H5 E5 S5 R4 V5
+ *
+ * v2 (07-ago-2026): sube la densidad y el contraste. Agrega superficies oscuras
+ * cálidas para bloques de color, sombra dura desplazada en lugar de blur suave,
+ * y bordes definidos. Reemplaza la versión editorial de mucho aire.
  *
  * Fuente única de verdad del sistema: color, tipografía, escala, motion.
  * Se declara con `@theme static` para que Tailwind v4 genere utilidades
@@ -11,7 +15,7 @@
  */
 
 @theme static {
-  /* --- paper / ink ------------------------------------------------------ */
+  /* --- papel / tinta ---------------------------------------------------- */
   --color-paper: oklch(97% 0.014 70);
   --color-paper-2: oklch(94.5% 0.018 65);
   --color-paper-3: oklch(91% 0.026 60);
@@ -21,13 +25,22 @@
   --color-ink: oklch(24% 0.022 40);
   --color-ink-deep: oklch(16% 0.02 35);
 
-  /* --- acentos (dos como máximo) ---------------------------------------- */
+  /* --- superficies oscuras para bloques de color ------------------------ */
+  --color-espresso: oklch(21% 0.032 42);
+  --color-espresso-2: oklch(27% 0.036 44);
+
+  /* --- acentos ---------------------------------------------------------- */
   --color-accent: oklch(54% 0.18 25); /* fresa — enlaces, CTA, estados activos */
   --color-accent-strong: oklch(46% 0.17 25);
   --color-accent-soft: oklch(90% 0.045 25);
   --color-leaf: oklch(50% 0.09 145); /* hoja — sólo etiquetas saludables */
   --color-leaf-soft: oklch(93% 0.03 145);
   --color-focus: oklch(50% 0.19 25);
+
+  /* Amarillo yema: superficie, nunca texto ni enlace. Sirve para pintar un
+     bloque entero del bento; por eso no cuenta como tercer acento tipográfico. */
+  --color-yolk: oklch(84% 0.14 85);
+  --color-yolk-deep: oklch(74% 0.15 78);
 
   /* --- tipografía ------------------------------------------------------- */
   --font-display: "Fraunces", ui-serif, Georgia, serif;
@@ -58,11 +71,17 @@
 
   /* --- reglas, radios, capas -------------------------------------------- */
   --rule-hair: 1px;
+  --rule-firm: 1.5px;
   --rule-thick: 3px;
   --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
+
+  /* Sombra dura desplazada: da peso sin el desenfoque genérico. */
+  --shadow-hard: 4px 4px 0 var(--color-ink);
+  --shadow-hard-sm: 2px 2px 0 var(--color-ink);
 
   --z-base: 0;
   --z-raised: 10;

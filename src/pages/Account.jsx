@@ -59,7 +59,7 @@ export default function Account() {
         {settings?.discountFirstOrder} % del primer pedido.
       </p>
 
-      <form onSubmit={onSubmit} className="mt-8 max-w-md">
+      <form onSubmit={onSubmit} className="tile mt-8 max-w-md p-5">
         {mode === 'registro' && (
           <label className="field mb-4">
             <span>Nombre</span>

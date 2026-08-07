@@ -22,15 +22,16 @@ export default function BlogPost() {
 
   return (
     <article className="wrap py-14">
-      <p className="text-xs text-neutral">
-        {shortDate(post.date)} · {post.author}
+      <p className="flex flex-wrap gap-1.5">
+        <span className="chip">{shortDate(post.date)}</span>
+        <span className="chip">{post.author}</span>
       </p>
-      <h1 className="measure mt-2" style={{ fontSize: 'var(--text-display-s)' }}>
+      <h1 className="measure mt-3" style={{ fontSize: 'var(--text-display-s)' }}>
         {post.title}
       </h1>
 
       <div
-        className="mt-8 aspect-16/9 overflow-hidden rounded-sm"
+        className="tile mt-8 aspect-16/9"
         style={{ background: 'var(--color-paper-3)' }}
       >
         <img

@@ -234,7 +234,7 @@ export default function FruitScene() {
         shadows={{ type: THREE.PCFShadowMap }}
         dpr={[1, 1.75]}
         gl={{ alpha: true }}
-        camera={{ position: [0, 1.5, 5.6], fov: 40 }}
+        camera={{ position: [0, 1.35, 4.9], fov: 40 }}
         style={{ touchAction: 'pan-y' }}
       >
         {/* Sin color de fondo: el canvas se funde con el papel de la sección

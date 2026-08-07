@@ -14,6 +14,7 @@ const blank = {
   includes: [],
   serves: 1,
   badges: [],
+  reviews: [],
   featured: false,
   active: true,
   prepNote: '',
@@ -131,6 +132,11 @@ function ProductEditor({ draft: initial, media, onCancel, onSave }) {
     setDraft({ ...draft, includes });
   };
 
+  const setReview = (index, key, value) => {
+    const reviews = draft.reviews.map((item, i) => (i === index ? { ...item, [key]: value } : item));
+    setDraft({ ...draft, reviews });
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -237,6 +243,70 @@ function ProductEditor({ draft: initial, media, onCancel, onSave }) {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* Reseñas reales. Mientras la lista esté vacía, la ficha no muestra
+          estrellas: no se inventa una valoración para llenar el hueco. */}
+      <div className="mt-8">
+        <div className="flex items-center justify-between">
+          <p className="text-xs uppercase tracking-widest text-muted">
+            Reseñas de clientes ({(draft.reviews || []).length})
+          </p>
+          <button
+            type="button"
+            className="btn btn-quiet text-sm"
+            onClick={() =>
+              setDraft({
+                ...draft,
+                reviews: [...(draft.reviews || []), { name: '', rating: 5, text: '' }],
+              })
+            }
+          >
+            + Agregar reseña
+          </button>
+        </div>
+        {(draft.reviews || []).length === 0 ? (
+          <p className="mt-2 text-sm text-muted">
+            Sin reseñas todavía. La ficha no muestra estrellas hasta que cargues opiniones reales.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-2">
+            {draft.reviews.map((review, i) => (
+              <li key={i} className="grid gap-2 sm:grid-cols-[10rem_5rem_1fr_auto]">
+                <input
+                  className="input"
+                  value={review.name}
+                  placeholder="Nombre"
+                  onChange={(e) => setReview(i, 'name', e.target.value)}
+                />
+                <input
+                  className="input nums"
+                  type="number"
+                  min="1"
+                  max="5"
+                  step="1"
+                  value={review.rating}
+                  onChange={(e) => setReview(i, 'rating', Number(e.target.value))}
+                />
+                <input
+                  className="input"
+                  value={review.text}
+                  placeholder="Qué dijo"
+                  onChange={(e) => setReview(i, 'text', e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="btn btn-ghost nowrap"
+                  onClick={() =>
+                    setDraft({ ...draft, reviews: draft.reviews.filter((_, index) => index !== i) })
+                  }
+                >
+                  Quitar
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="mt-8 flex flex-wrap gap-5">

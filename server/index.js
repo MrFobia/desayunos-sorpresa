@@ -84,13 +84,40 @@ app.use(express.json({ limit: '4mb' }));
 
 /* --- lectura pública --- */
 
+/**
+ * Unidades vendidas por producto, contadas sobre los pedidos que no se
+ * cancelaron. Es el orden real de «los más pedidos»; no una lista a mano.
+ */
+function unitsSold(db) {
+  const tally = {};
+  db.orders
+    .filter((order) => order.status !== 'cancelado')
+    .forEach((order) => {
+      order.items.forEach((item) => {
+        tally[item.productId] = (tally[item.productId] || 0) + item.qty;
+      });
+    });
+  return tally;
+}
+
 app.get('/api/bootstrap', (req, res) => {
   const db = readDb();
+  const sold = unitsSold(db);
+  const active = db.products.filter((p) => p.active);
+
   res.json({
-    products: db.products.filter((p) => p.active),
+    products: active.map((p) => ({ ...p, sold: sold[p.id] || 0 })),
     addons: db.addons.filter((a) => a.active),
     posts: db.posts.filter((p) => p.published),
     settings: db.settings,
+    // Cifras que salen de la propia base: nada de métricas inventadas.
+    stats: {
+      products: active.length,
+      slots: db.settings.delivery.slots.length,
+      cities: db.settings.delivery.cities.length,
+      earliest: db.settings.delivery.slots[0]?.split('–')[0]?.trim() || '',
+      addons: db.addons.filter((a) => a.active).length,
+    },
   });
 });
 
@@ -337,6 +364,9 @@ crud('products', 'p', (product) => ({
   images: (product.images || []).filter(Boolean),
   includes: (product.includes || []).filter((i) => i && i.name),
   badges: (product.badges || []).filter(Boolean),
+  // Reseñas cargadas a mano desde el panel. Vacío significa vacío: la ficha
+  // no muestra estrellas hasta que existan opiniones reales.
+  reviews: (product.reviews || []).filter((r) => r && r.text && r.name),
   active: product.active !== false,
   featured: Boolean(product.featured),
 }));

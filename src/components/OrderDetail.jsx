@@ -6,7 +6,7 @@ export default function OrderDetail({ order }) {
   const current = Math.max(0, STEPS.indexOf(order.status));
 
   return (
-    <section>
+    <section className="tile p-5 md:p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-rule pb-3">
         <h2 className="text-xl">
           Pedido <span className="nums">{order.code}</span>

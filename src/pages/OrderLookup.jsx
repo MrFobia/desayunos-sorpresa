@@ -32,11 +32,13 @@ export default function OrderLookup() {
   }, [code]);
 
   return (
-    <div className="wrap py-14">
-      <h1 className="text-4xl">Seguir un pedido</h1>
-      <p className="measure mt-3 text-muted">
-        Escribí el código que te dimos al confirmar. Tiene la forma AUR-XXXXXX.
-      </p>
+    <div className="wrap py-8 md:py-12">
+      <div className="tile tile-dark grain px-6 py-8 md:px-8">
+        <h1 className="text-3xl md:text-4xl">Seguir un pedido</h1>
+        <p className="measure mt-2 opacity-85">
+          Escribí el código que te dimos al confirmar. Tiene la forma AUR-XXXXXX.
+        </p>
+      </div>
 
       <form
         className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end"

@@ -63,7 +63,8 @@ acordado: se cambia o se borra desde el panel.
 ## Panel
 
 - **Desayunos** — precio, precio tachado, fotos, qué trae la caja ítem por ítem,
-  categoría, para cuántas personas, etiquetas, publicar/ocultar, marcar destacado.
+  categoría, para cuántas personas, etiquetas, reseñas de clientes, publicar/ocultar,
+  marcar destacado.
 - **Adicionales** — lo que el cliente puede sumarle a cualquier caja.
 - **Pedidos** — listado con filtro por estado, cambio de estado y detalle completo
   (dirección, franja, adicionales, texto de la tarjeta).
@@ -91,6 +92,19 @@ inicial.
 motion viven ahí y se exponen a Tailwind con `@theme static`. Ningún color ni familia
 tipográfica se escribe fuera de ese archivo. Fuentes: Fraunces (display) y Switzer
 (cuerpo).
+
+El lenguaje visual es de bloques: superficies oscuras cálidas (`tile-dark`) y amarillo
+yema (`tile-yolk`) para pintar secciones enteras, borde firme de 1,5 px, sombra dura
+desplazada en lugar de blur, grano sutil sobre los bloques oscuros, y etiquetas
+compactas (`chip`) para la información de las tarjetas. Las clases viven en
+`src/index.css` dentro de `@layer components`.
+
+**Nada de valoraciones inventadas.** Las tarjetas y la ficha muestran estrellas sólo si
+el producto tiene reseñas cargadas desde el panel; sin reseñas no aparece ninguna
+puntuación. Lo mismo con «los más pedidos»: el orden sale de las unidades realmente
+vendidas (`unitsSold` en `server/index.js`) y sólo cae a los destacados del panel
+mientras no haya pedidos. Las cifras del hero —cantidad de desayunos, adicionales,
+franjas, primera entrega— se calculan de la base.
 
 **Todo el CSS propio va dentro de `@layer`.** Escrito fuera de una capa gana sobre las
 utilidades de Tailwind y `mt-6` deja de funcionar.

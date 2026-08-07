@@ -6,23 +6,19 @@ export default function Blog() {
   const { posts } = useStore();
 
   return (
-    <div className="wrap py-14">
-      <h1 className="text-4xl">Diario de cocina</h1>
-      <p className="measure mt-3 text-md text-muted">
-        Lo que aprendemos armando cajas de madrugada.
-      </p>
+    <div className="wrap py-8 md:py-12">
+      <div className="tile tile-dark grain px-6 py-8 md:px-8">
+        <h1 className="text-3xl md:text-4xl">Diario de cocina</h1>
+        <p className="measure mt-2 opacity-85">
+          Lo que aprendemos armando cajas de madrugada.
+        </p>
+      </div>
 
-      <div className="mt-12 divide-y divide-rule border-y border-rule">
+      <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <article key={post.id}>
-            <Link
-              to={`/diario/${post.slug}`}
-              className="group grid gap-5 py-8 md:grid-cols-[16rem_1fr] md:items-start"
-            >
-              <div
-                className="aspect-16/10 overflow-hidden rounded-sm"
-                style={{ background: 'var(--color-paper-3)' }}
-              >
+          <article key={post.id} className="tile group">
+            <Link to={`/diario/${post.slug}`} className="block">
+              <div className="aspect-16/10 overflow-hidden" style={{ background: 'var(--color-paper-3)' }}>
                 <img
                   src={post.cover}
                   alt=""
@@ -32,12 +28,13 @@ export default function Blog() {
                   className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                 />
               </div>
-              <div>
-                <p className="text-xs text-neutral">
-                  {shortDate(post.date)} · {post.author}
+              <div className="p-4">
+                <p className="flex flex-wrap gap-1.5">
+                  <span className="chip">{shortDate(post.date)}</span>
+                  <span className="chip">{post.author}</span>
                 </p>
-                <h2 className="mt-1.5 text-2xl leading-tight">{post.title}</h2>
-                <p className="measure mt-2 text-muted">{post.excerpt}</p>
+                <h2 className="mt-2 text-xl leading-tight">{post.title}</h2>
+                <p className="mt-1.5 text-sm text-muted">{post.excerpt}</p>
               </div>
             </Link>
           </article>

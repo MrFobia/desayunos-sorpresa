@@ -219,6 +219,12 @@ const products = [
   },
 ];
 
+// Ningún desayuno arranca con reseñas: se cargan desde el panel cuando existan
+// opiniones reales. Estrellas inventadas serían mentira en la ficha.
+products.forEach((product) => {
+  product.reviews = [];
+});
+
 const addons = [
   { id: 'a1', name: 'Globo metalizado', price: 12000, category: 'detalle', image: img('banano-rosa'), active: true },
   { id: 'a2', name: 'Ramo de flores pequeño', price: 35000, category: 'detalle', image: img('smoothie-fresa'), active: true },

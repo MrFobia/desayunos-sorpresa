@@ -77,14 +77,19 @@ export default function Checkout() {
   }
 
   return (
-    <div className="wrap py-12">
-      <h1 className="text-4xl">Confirmá el pedido</h1>
+    <div className="wrap py-8 md:py-12">
+      <div className="tile tile-dark grain px-6 py-7 md:px-8">
+        <h1 className="text-3xl md:text-4xl">Confirmá el pedido</h1>
+        <p className="mt-2 text-sm opacity-80">
+          Pago contra entrega o por transferencia. No pedimos datos de tarjeta.
+        </p>
+      </div>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <div className="mt-8 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
         {/* ------------------------------------------------------ formulario */}
         <form onSubmit={submitOrder}>
           {!user && (
-            <section className="rounded-sm border border-rule bg-paper-2 p-5">
+            <section className="tile p-5" style={{ background: 'var(--color-paper-2)' }}>
               <h2 className="text-lg">¿Con cuenta o sin cuenta?</h2>
               <p className="mt-1 text-sm text-muted">
                 Podés pedir sin registrarte. Si creás una cuenta, tu primer pedido lleva{' '}
@@ -99,14 +104,9 @@ export default function Checkout() {
                   <button
                     key={option.id}
                     type="button"
+                    className="pill"
                     aria-pressed={mode === option.id}
                     onClick={() => setMode(option.id)}
-                    className="rounded-pill border px-3.5 py-1.5 text-sm nowrap"
-                    style={{
-                      borderColor: mode === option.id ? 'var(--color-ink)' : 'var(--color-rule)',
-                      background: mode === option.id ? 'var(--color-ink)' : 'transparent',
-                      color: mode === option.id ? 'var(--color-paper)' : 'var(--color-ink)',
-                    }}
                   >
                     {option.label}
                   </button>
@@ -147,7 +147,7 @@ export default function Checkout() {
           )}
 
           {user && (
-            <p className="rounded-sm border border-rule bg-paper-2 p-4 text-sm">
+            <p className="tile p-4 text-sm" style={{ background: 'var(--color-paper-2)' }}>
               Entrando como <strong>{user.name}</strong>.{' '}
               {!user.firstOrderUsed && (
                 <span style={{ color: 'var(--color-accent)' }}>
@@ -227,7 +227,7 @@ export default function Checkout() {
         </form>
 
         {/* --------------------------------------------------------- resumen */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="tile self-start p-5 lg:sticky lg:top-24" style={{ background: 'var(--color-paper-2)' }}>
           <h2 className="text-xl">Tu pedido</h2>
           <ul className="mt-4 divide-y divide-rule border-y border-rule">
             {cart.map((line) => (

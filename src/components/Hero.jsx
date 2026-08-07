@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { money } from '../lib/format.js';
 
 const FruitScene = lazy(() => import('./FruitScene.jsx'));
 
@@ -26,37 +27,47 @@ function useCanRender3D() {
   return ok;
 }
 
-/* Macroestructura Marquee Hero: el titular ocupa el pliegue y la escena vive
-   al lado; el primer CTA aparece abajo del corte, no encima de la fotografía. */
-export default function Hero({ hero, ctaHref = '/desayunos' }) {
+/* Macroestructura Bento Grid: el pliegue es una rejilla de bloques de distinto
+   tamaño —titular, escena, precio de entrada, franjas— en vez de un titular
+   solo con mucho aire al costado. */
+export default function Hero({ hero, stats, products = [] }) {
   const can3D = useCanRender3D();
+  const cheapest = products.length ? Math.min(...products.map((p) => p.price)) : 0;
 
   return (
-    <section className="border-b border-rule bg-paper-2">
-      <div className="wrap grid gap-8 pt-12 pb-10 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-12 md:pt-16 md:pb-14">
-        <div className="rise">
-          <h1
-            className="tracking-tight"
-            style={{ fontSize: 'var(--text-display)', fontWeight: 600 }}
-          >
-            {hero?.title || 'Llega antes que la alarma.'}
-          </h1>
-          <p className="measure mt-5 text-md text-muted">{hero?.subtitle}</p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <Link to={ctaHref} className="btn btn-primary">
+    <section className="wrap pt-6 pb-8 md:pt-8">
+      <div className="grid gap-4 lg:grid-cols-3">
+        {/* Bloque titular */}
+        <div className="tile tile-dark grain relative flex flex-col justify-between p-6 md:p-8 lg:col-span-2">
+          <div className="relative rise">
+            <span className="chip chip-solid">Bogotá y alrededores</span>
+            <h1 className="mt-4 tracking-tight" style={{ fontSize: 'var(--text-display-s)' }}>
+              {hero?.title || 'Llega antes que la alarma.'}
+            </h1>
+            <p className="measure mt-4 opacity-85">{hero?.subtitle}</p>
+          </div>
+
+          <div className="relative mt-7 flex flex-wrap items-center gap-3">
+            <Link to="/desayunos" className="btn btn-primary">
               {hero?.ctaLabel || 'Ver los desayunos'}
             </Link>
-            <Link to="/pedido" className="btn btn-ghost">
+            <Link
+              to="/pedido"
+              className="btn btn-ghost"
+              style={{ color: 'var(--color-paper)', borderColor: 'var(--color-espresso-2)' }}
+            >
               Seguir un pedido
             </Link>
+            {cheapest > 0 && (
+              <p className="nums text-sm opacity-75">Desde {money(cheapest)}</p>
+            )}
           </div>
         </div>
 
+        {/* Bloque de la escena */}
         <div
-          className={`relative aspect-4/5 overflow-hidden md:aspect-square ${
-            can3D ? '' : 'rounded-sm'
-          }`}
-          style={{ background: can3D ? 'transparent' : 'var(--color-paper-3)' }}
+          className="tile relative aspect-4/3 overflow-hidden lg:aspect-auto lg:min-h-[24rem]"
+          style={{ background: 'var(--color-paper-2)' }}
         >
           {can3D ? (
             <Suspense
@@ -78,11 +89,28 @@ export default function Hero({ hero, ctaHref = '/desayunos' }) {
               className="h-full w-full object-cover"
               fetchPriority="high"
               width="1400"
-              height="1400"
+              height="1050"
             />
           )}
         </div>
       </div>
+
+      {/* Cifras: todas salen de la base, ninguna está inventada */}
+      {stats && (
+        <dl className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {[
+            [stats.products, 'desayunos en carta'],
+            [stats.addons, 'adicionales para sumar'],
+            [stats.slots, 'franjas de entrega'],
+            [stats.earliest, 'la primera entrega'],
+          ].map(([value, label]) => (
+            <div key={label} className="tile px-4 py-3.5">
+              <dt className="nums font-display text-3xl leading-none">{value}</dt>
+              <dd className="mt-1.5 text-sm text-muted">{label}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
     </section>
   );
 }
