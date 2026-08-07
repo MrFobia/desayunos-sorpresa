@@ -231,7 +231,7 @@ export default function FruitScene() {
   return (
     <div className="relative h-full w-full">
       <Canvas
-        shadows
+        shadows={{ type: THREE.PCFShadowMap }}
         dpr={[1, 1.75]}
         gl={{ alpha: true }}
         camera={{ position: [0, 1.5, 5.6], fov: 40 }}
