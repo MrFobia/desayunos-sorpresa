@@ -1,0 +1,28 @@
+name = "desayunos-sorpresa"
+main = "worker/index.js"
+compatibility_date = "2026-07-01"
+compatibility_flags = ["nodejs_compat"]
+
+# El mismo Worker sirve la aplicación y la API. Los archivos de `dist` se
+# resuelven antes de llegar al código; `/api/*` no existe como archivo, así que
+# cae en el Worker. `single-page-application` hace que cualquier ruta del
+# enrutador de React devuelva index.html en vez de un 404.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Base D1. `database_id` se completa al crearla:
+#   npx wrangler d1 create desayunos-sorpresa
+[[d1_databases]]
+binding = "DB"
+database_name = "desayunos-sorpresa"
+database_id = "PENDIENTE_DE_CREAR"
+migrations_dir = "migrations"
+
+[observability]
+enabled = true
+
+# La contraseña del panel y el secreto de firma NO van acá: son secretos.
+#   npx wrangler secret put ADMIN_PASSWORD
+#   npx wrangler secret put SESSION_SECRET

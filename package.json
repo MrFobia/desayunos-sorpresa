@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "node server/index.js",
+    "dev:api": "wrangler dev --port 8787",
     "dev:web": "vite",
-    "build": "vite build",
-    "preview": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"vite preview\"",
-    "seed": "node server/seed.js"
+    "build": "node scripts/generate-media-manifest.mjs && vite build",
+    "preview": "npm run build && wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "db:generate": "node scripts/generate-seed-sql.mjs",
+    "db:migrate": "wrangler d1 migrations apply desayunos-sorpresa --local",
+    "db:migrate:remote": "wrangler d1 migrations apply desayunos-sorpresa --remote"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",
@@ -17,6 +20,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "hono": "^4.13.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
@@ -26,6 +30,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.5",
     "concurrently": "^10.0.4",
-    "vite": "^8.2.1"
+    "vite": "^8.2.1",
+    "wrangler": "^4.120.0"
   }
 }

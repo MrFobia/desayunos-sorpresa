@@ -1,18 +1,15 @@
 /**
- * Semilla de la base de datos.
+ * Contenido inicial del sitio: fuente de verdad de la carta.
+ *
  * Los 8 desayunos y sus precios vienen de las fotos del cuaderno del cliente
  * (Desktop/Desayunos, 07-ago-2026). Cualquier ítem que no se leía con claridad
  * está marcado con `needsReview: true` para confirmarlo con el cliente.
  *
- *   node server/seed.js          -> crea db.json si no existe
- *   node server/seed.js --force  -> lo reescribe desde cero
+ * Este archivo no se ejecuta en producción: `npm run db:generate` lo traduce a
+ * `migrations/0002_seed.sql`, que es lo que carga D1. Para cambiar la carta de
+ * arranque se edita acá y se regenera la migración; una vez desplegado, el
+ * contenido se administra desde el panel.
  */
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const DB_PATH = path.join(__dirname, 'db.json');
 
 const img = (name) => `/img/${name}.jpg`;
 
@@ -325,18 +322,5 @@ export function buildSeed() {
     addons,
     posts,
     settings,
-    orders: [],
-    users: [],
-    subscribers: [],
   };
-}
-
-if (process.argv[1] && process.argv[1].endsWith('seed.js')) {
-  const force = process.argv.includes('--force');
-  if (fs.existsSync(DB_PATH) && !force) {
-    console.log('db.json ya existe. Usá --force para reescribirlo.');
-  } else {
-    fs.writeFileSync(DB_PATH, JSON.stringify(buildSeed(), null, 2));
-    console.log('db.json escrito con', products.length, 'productos.');
-  }
 }

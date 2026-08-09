@@ -9,3 +9,6 @@ server/db.json
 
 # Capturas de trabajo
 .capturas
+
+# Estado local de Wrangler y D1
+.wrangler
