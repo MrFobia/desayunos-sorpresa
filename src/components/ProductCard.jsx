@@ -40,35 +40,37 @@ export default function ProductCard({ product, size = 'base', priority = false }
           )}
         </div>
 
-        <div className="pt-4">
-          <p className="label">{categoryLabel(product.category)}</p>
+        <div className="pt-3.5">
+          <p className="label label-tight">{categoryLabel(product.category)}</p>
 
-          <div className="mt-1.5 flex items-baseline justify-between gap-3">
-            <h3 className={size === 'lead' ? 'text-2xl' : 'text-lg sm:text-xl'}>{product.name}</h3>
-            <p className="nums shrink-0 text-right">
-              {discounted && (
-                <span className="mr-1.5 text-sm text-neutral line-through">
-                  {money(product.compareAt)}
-                </span>
-              )}
-              <span style={{ color: discounted ? 'var(--color-accent)' : 'inherit' }}>
-                {money(product.price)}
-              </span>
-            </p>
-          </div>
+          {/* El nombre ocupa el ancho completo y el precio va debajo. Cuando
+              compartían línea, en dos columnas de móvil al título le quedaban
+              ~80 px y partía las palabras: «Cesta Campestr / e». */}
+          <h3
+            className={`mt-1.5 hyphen-es ${size === 'lead' ? 'text-xl sm:text-2xl' : 'title-2l text-base sm:text-lg'}`}
+          >
+            {product.name}
+          </h3>
 
-          <p className="mt-1.5 text-sm text-muted">{product.tagline}</p>
-
-          <p className="label mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-1">
-            <span>{product.includes.length} cosas dentro</span>
-            <span aria-hidden="true">·</span>
-            <span>{product.serves === 1 ? 'para una persona' : `para ${product.serves} personas`}</span>
-            {rating && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span className="nums">★ {rating}</span>
-              </>
+          <p className="nums mt-1.5 flex flex-wrap items-baseline gap-x-2">
+            <span
+              className={size === 'lead' ? 'text-lg' : 'text-base'}
+              style={{ color: discounted ? 'var(--color-accent)' : 'inherit' }}
+            >
+              {money(product.price)}
+            </span>
+            {discounted && (
+              <span className="text-sm text-neutral line-through">{money(product.compareAt)}</span>
             )}
+          </p>
+
+          {/* Dos líneas como máximo: así las tarjetas vecinas no quedan
+              desalineadas por una descripción más larga que la otra. */}
+          <p className="mt-2 line-clamp-2 text-sm text-muted">{product.tagline}</p>
+
+          <p className="label label-tight mt-2.5">
+            {product.includes.length} cosas · {product.serves === 1 ? '1 persona' : `${product.serves} personas`}
+            {rating && <span className="nums"> · ★ {rating}</span>}
           </p>
         </div>
       </Link>

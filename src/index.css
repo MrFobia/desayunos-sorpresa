@@ -120,6 +120,49 @@
     line-height: 1.4;
   }
 
+  /* Versalitas dentro de una tarjeta angosta. Con el tracking completo,
+     «6 COSAS DENTRO · PARA UNA PERSONA» ocupaba dos líneas en móvil y
+     competía con el nombre del producto. */
+  .label-tight {
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+  }
+
+  @media (min-width: 640px) {
+    .label-tight {
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+    }
+  }
+
+  /* Partir por sílabas antes que por cualquier letra. El corte a mitad de
+     palabra sin guion («Campestr / e») se lee como un error de maquetación. */
+  .hyphen-es {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Título de tarjeta: reserva dos líneas y corta en la segunda. Sin esto,
+     un nombre de una línea junto a otro de dos desalinea el precio y la
+     descripción de las tarjetas vecinas de la misma fila. */
+  .title-2l {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  /* La reserva de dos líneas sólo hace falta donde los nombres se parten:
+     en columnas angostas. A partir de 1024 px entran en una línea y el
+     espacio reservado se vería como un hueco. */
+  @media (max-width: 1023px) {
+    .title-2l {
+      min-height: 2.2em;
+      min-height: 2lh;
+    }
+  }
+
   /* --------------------------------------------------------- superficies */
 
   /* Panel mate. Sin contorno: se separa del fondo por tono, no por borde. */
