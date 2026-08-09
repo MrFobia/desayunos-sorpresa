@@ -6,17 +6,19 @@
  * los mismos anclajes del sistema (fresa 25°, hoja 145°, crema 70°) para que
  * el hero no se despegue del resto de la página.
  */
+/* Tonos desaturados y algo más oscuros que la versión anterior: los colores
+   vivos hacían que las frutas leyeran como juguetes de plástico. */
 export const FRUIT = {
-  strawberry: '#c8402f',
-  strawberrySeed: '#f2d9a8',
-  leaf: '#4e7c46',
-  blueberry: '#3b3f7a',
-  blueberryBloom: '#6d74b8',
-  kiwiFlesh: '#8fae4b',
-  kiwiCore: '#f0edd6',
-  kiwiSkin: '#7b6242',
-  orange: '#e08a2c',
-  bowl: '#efe2cf',
-  bowlRim: '#e0cdb2',
-  cream: '#faf3ea',
+  strawberry: '#a8362c',
+  strawberrySeed: '#e3cfa4',
+  leaf: '#5c6f48',
+  blueberry: '#3a3e5c',
+  blueberryBloom: '#6b7093',
+  kiwiFlesh: '#8a9a56',
+  kiwiCore: '#e8e4d2',
+  kiwiSkin: '#6f5c43',
+  orange: '#c9832f',
+  bowl: '#e8ddcb',
+  bowlRim: '#d9c8ae',
+  cream: '#f7f1e7',
 };

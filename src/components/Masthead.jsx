@@ -29,7 +29,7 @@ export default function Masthead() {
   return (
     <>
       {settings?.banner?.active && (
-        <div className="tile-dark grain relative border-0">
+        <div className="panel-dark grain relative" style={{ borderRadius: 0 }}>
           <div className="wrap relative py-2 text-center text-xs tracking-wide">
             {settings.banner.text}
           </div>
@@ -37,32 +37,37 @@ export default function Masthead() {
       )}
 
       <header
-        className="sticky top-0 border-b bg-paper"
-        style={{ zIndex: 'var(--z-sticky)', borderColor: 'var(--color-ink)', borderBottomWidth: 'var(--rule-firm)' }}
+        className="sticky top-0 border-b"
+        style={{
+          zIndex: 'var(--z-sticky)',
+          borderColor: 'var(--color-rule)',
+          background: 'color-mix(in oklab, var(--color-paper) 88%, transparent)',
+          backdropFilter: 'blur(12px)',
+        }}
       >
-        <div className="wrap flex items-center gap-3 py-3">
+        <div className="wrap flex items-center gap-5 py-4">
           <Link to="/" className="font-display text-xl leading-none tracking-tight nowrap md:text-2xl">
             {brand.split(' ')[0]}
             <span className="hidden md:inline"> {brand.split(' ').slice(1).join(' ')}</span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Principal">
             <button
               type="button"
-              className="pill border-transparent"
+              className="link inline-flex items-center gap-1.5 text-sm nowrap"
               aria-expanded={megaOpen}
               aria-controls="mega"
               onClick={() => setMegaOpen((v) => !v)}
             >
               Desayunos
-              <span aria-hidden="true" className="text-xs">
+              <span aria-hidden="true" className="text-[9px] leading-none">
                 {megaOpen ? '▲' : '▼'}
               </span>
             </button>
-            <NavLink to="/diario" className="pill border-transparent">
+            <NavLink to="/diario" className="link text-sm nowrap">
               Diario
             </NavLink>
-            <NavLink to="/pedido" className="pill border-transparent">
+            <NavLink to="/pedido" className="link text-sm nowrap">
               Seguir pedido
             </NavLink>
           </nav>
@@ -140,7 +145,7 @@ export default function Masthead() {
             </ul>
             <div className="wrap flex flex-wrap gap-2 pb-4">
               {[...new Set(products.map((p) => p.category))].map((category) => (
-                <Link key={category} to={`/desayunos?c=${category}`} className="pill">
+                <Link key={category} to={`/desayunos?c=${category}`} className="filter">
                   {categoryLabel(category)}
                 </Link>
               ))}
@@ -159,7 +164,7 @@ function MegaFeature({ products }) {
   const top = [...products].sort((a, b) => (b.sold || 0) - (a.sold || 0))[0];
   if (!top) return null;
   return (
-    <Link to={`/desayunos/${top.slug}`} className="tile grain group block">
+    <Link to={`/desayunos/${top.slug}`} className="group block">
       <div className="aspect-16/10 overflow-hidden">
         <img
           src={top.images[0]}
@@ -169,7 +174,7 @@ function MegaFeature({ products }) {
         />
       </div>
       <div className="p-4">
-        <p className="chip chip-accent">Más pedido</p>
+        <p className="tag tag-accent">Más pedido</p>
         <p className="mt-2 font-display text-lg leading-tight">{top.name}</p>
         <p className="nums mt-0.5 text-sm text-muted">Desde {money(top.price)}</p>
       </div>
@@ -218,7 +223,7 @@ function SearchBox({ products, fullWidth = false }) {
         </label>
         <input
           id={listId}
-          className={`input rounded-pill py-1.5 pl-3.5 ${
+          className={`input-boxed ${
             fullWidth ? 'w-full' : 'w-44 transition-[width] duration-200 lg:w-56 lg:focus:w-72'
           }`}
           type="search"
@@ -235,7 +240,7 @@ function SearchBox({ products, fullWidth = false }) {
 
       {open && matches.length > 0 && (
         <ul
-          className="tile absolute right-0 top-full mt-2 w-72 p-1"
+          className="panel absolute right-0 top-full mt-2 w-72 p-1" style={{ boxShadow: "var(--shadow-lift)" }}
           style={{ zIndex: 'var(--z-overlay)' }}
         >
           {matches.map((p) => (

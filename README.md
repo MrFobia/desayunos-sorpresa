@@ -93,11 +93,25 @@ motion viven ahí y se exponen a Tailwind con `@theme static`. Ningún color ni 
 tipográfica se escribe fuera de ese archivo. Fuentes: Fraunces (display) y Switzer
 (cuerpo).
 
-El lenguaje visual es de bloques: superficies oscuras cálidas (`tile-dark`) y amarillo
-yema (`tile-yolk`) para pintar secciones enteras, borde firme de 1,5 px, sombra dura
-desplazada en lugar de blur, grano sutil sobre los bloques oscuros, y etiquetas
-compactas (`chip`) para la información de las tarjetas. Las clases viven en
-`src/index.css` dentro de `@layer components`.
+**El lenguaje visual es fotográfico.** La imagen ocupa el primer plano y la interfaz
+desaparece: superficies mate en hueso y lino, filetes de 1 px casi invisibles en vez de
+bordes, sombras muy difusas, radios de 2–4 px, un solo acento vino apagado y grano
+fílmico sutil. Las clases viven en `src/index.css` dentro de `@layer components`:
+`shot` (marco de foto), `veil` (velo para texto sobre imagen), `panel` / `panel-dark`,
+`label` (versalitas de sistema), `filter` (filtro tipográfico subrayado), `tag`.
+
+Una versión anterior usaba bordes negros de 1,5 px, sombras duras desplazadas y amarillo
+saturado. Para un regalo de día especial leía como caricatura; por eso se reemplazó.
+
+**Texto sobre fotografía.** Nunca va suelto sobre la imagen: o cae sobre una tarjeta de
+papel apoyada encima, o sobre un `veil` de dos degradados. Una sábana blanca no admite
+texto claro por mucho velo que se le ponga, y oscurecer la foto entera arruina lo único
+que importa.
+
+**El revelado al hacer scroll no puede ocultar nada.** `Reveal` arranca visible y sólo
+se oculta si al montar está fuera de la ventana y hay `IntersectionObserver`, con un
+respaldo de 3 s. Un efecto de entrada jamás debe ser la razón por la que una página
+aparece en blanco.
 
 **Nada de valoraciones inventadas.** Las tarjetas y la ficha muestran estrellas sólo si
 el producto tiene reseñas cargadas desde el panel; sin reseñas no aparece ninguna

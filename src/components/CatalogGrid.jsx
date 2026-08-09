@@ -94,10 +94,11 @@ export default function CatalogGrid({ products, limit, showFilters = true }) {
     <div>
       {showFilters && (
         <div className="mb-6">
-          {/* Fila desplazable de píldoras: `.rail` reserva 15rem por columna,
-              que estira los filtros hasta media pantalla en móvil. */}
+          {/* Filtros tipográficos con subrayado, en una fila desplazable.
+              Las cápsulas rellenas de la versión anterior competían con la
+              fotografía y pesaban más que los productos. */}
           <div
-            className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
+            className="-mx-6 flex gap-6 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
             role="group"
             aria-label="Filtrar por tipo"
           >
@@ -105,7 +106,7 @@ export default function CatalogGrid({ products, limit, showFilters = true }) {
               <button
                 key={c.id}
                 type="button"
-                className="pill"
+                className="filter"
                 aria-pressed={category === c.id}
                 onClick={() => setCategory(c.id)}
               >
@@ -114,7 +115,7 @@ export default function CatalogGrid({ products, limit, showFilters = true }) {
             ))}
             <button
               type="button"
-              className="pill"
+              className="filter"
               aria-pressed={onlyOffers}
               onClick={() => setOnlyOffers((v) => !v)}
             >
@@ -172,14 +173,14 @@ export default function CatalogGrid({ products, limit, showFilters = true }) {
       )}
 
       {filtered.length === 0 ? (
-        <div className="tile p-10 text-center">
+        <div className="panel p-10 text-center">
           <p className="text-muted">Con esos filtros no queda nada. Probá con otro precio o tamaño.</p>
           <button type="button" className="btn btn-ghost mt-4" onClick={clearAll}>
             Limpiar filtros
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((product, i) => (
             <ProductCard key={product.id} product={product} priority={i < 2} />
           ))}

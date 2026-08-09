@@ -39,7 +39,7 @@ function Strawberry({ scale = 1, ...props }) {
     <group {...props} scale={scale}>
       <mesh castShadow>
         <latheGeometry args={[profile, 40]} />
-        <meshStandardMaterial color={FRUIT.strawberry} roughness={0.4} />
+        <meshStandardMaterial color={FRUIT.strawberry} roughness={0.72} />
       </mesh>
       {seeds.map((position, i) => (
         <mesh key={i} position={position} scale={[1, 1.7, 1]}>
@@ -76,7 +76,7 @@ function Blueberry({ scale = 1, ...props }) {
     <group {...props} scale={scale}>
       <mesh castShadow>
         <sphereGeometry args={[0.32, 24, 20]} />
-        <meshStandardMaterial color={FRUIT.blueberry} roughness={0.35} />
+        <meshStandardMaterial color={FRUIT.blueberry} roughness={0.62} />
       </mesh>
       <mesh position={[0, 0.29, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.05, 0.12, 10]} />
@@ -94,7 +94,7 @@ function KiwiSlice({ scale = 1, ...props }) {
       <group rotation={[-0.35, 0.4, 0.15]}>
         <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.5, 0.5, 0.1, 40]} />
-          <meshStandardMaterial color={FRUIT.kiwiFlesh} roughness={0.65} />
+          <meshStandardMaterial color={FRUIT.kiwiFlesh} roughness={0.85} />
         </mesh>
         {[0.051, -0.051].map((z) => (
           <mesh key={z} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, z]}>
@@ -129,7 +129,7 @@ function OrangeWedge({ scale = 1, ...props }) {
   return (
     <mesh castShadow {...props} scale={scale} rotation={[Math.PI / 2, 0, 0]}>
       <cylinderGeometry args={[0.5, 0.5, 0.16, 32, 1, false, 0, Math.PI]} />
-      <meshStandardMaterial color={FRUIT.orange} roughness={0.5} />
+      <meshStandardMaterial color={FRUIT.orange} roughness={0.75} />
     </mesh>
   );
 }
@@ -152,11 +152,11 @@ function Bowl() {
     <group position={[0, -1.12, 0]}>
       <mesh receiveShadow castShadow>
         <latheGeometry args={[profile, 64]} />
-        <meshStandardMaterial color={FRUIT.bowl} roughness={0.6} side={THREE.DoubleSide} />
+        <meshStandardMaterial color={FRUIT.bowl} roughness={0.9} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[0, 0.95, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.4, 0.05, 10, 64]} />
-        <meshStandardMaterial color={FRUIT.bowlRim} roughness={0.5} />
+        <meshStandardMaterial color={FRUIT.bowlRim} roughness={0.85} />
       </mesh>
       {/* pie del cuenco */}
       <mesh position={[0, -0.06, 0]}>
@@ -238,10 +238,12 @@ export default function FruitScene() {
         style={{ touchAction: 'pan-y' }}
       >
         {/* Sin color de fondo: el canvas se funde con el papel de la sección
-            en vez de dibujar un rectángulo de otro tono. */}
-        <ambientLight intensity={0.75} />
-        <directionalLight position={[3, 6, 4]} intensity={2.1} castShadow shadow-mapSize={[1024, 1024]} />
-        <directionalLight position={[-4, 2, -3]} intensity={0.5} color={FRUIT.orange} />
+            en vez de dibujar un rectángulo de otro tono.
+            Luz suave y lateral, como una ventana, en vez del foco duro que
+            hacía brillar las frutas como plástico. */}
+        <ambientLight intensity={1.15} />
+        <directionalLight position={[2.5, 5, 3.5]} intensity={1.25} castShadow shadow-mapSize={[1024, 1024]} />
+        <directionalLight position={[-4, 1.5, -2.5]} intensity={0.35} color={FRUIT.cream} />
         <PresentationControls
           global
           snap

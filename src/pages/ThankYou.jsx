@@ -35,8 +35,8 @@ export default function ThankYou() {
 
   return (
     <div className="wrap py-8 md:py-12">
-      <div className="tile tile-dark grain px-6 py-8 md:px-8 md:py-10">
-        <span className="chip chip-solid">Pedido confirmado</span>
+      <div className="panel-dark grain relative px-6 py-8 md:px-8 md:py-10">
+        <span className="tag tag-accent">Pedido confirmado</span>
         <h1 className="mt-4" style={{ fontSize: 'var(--text-display-s)' }}>
           Gracias, {order.customer.name.split(' ')[0]}.
         </h1>
@@ -64,7 +64,7 @@ export default function ThankYou() {
       </div>
 
       {first && (
-        <p className="tile mt-4 p-4 text-sm" style={{ background: 'var(--color-yolk)' }}>
+        <p className="panel mt-4 p-4 text-sm" style={{ background: 'var(--color-yolk)' }}>
           Lo primero que sale de la cocina: <strong>{first.name}</strong>, el{' '}
           {prettyDate(first.delivery.date)} en la franja {first.delivery.slot}.
         </p>

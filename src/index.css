@@ -27,7 +27,8 @@
     color: var(--color-ink);
     font-family: var(--font-body);
     font-size: var(--text-base);
-    line-height: 1.6;
+    line-height: 1.65;
+    font-weight: 400;
     font-synthesis-weight: none;
     -webkit-font-smoothing: antialiased;
   }
@@ -38,12 +39,12 @@
   h4 {
     font-family: var(--font-display);
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    /* 300 en display grande: el peso 600 sobre serif alta contrastada
+       endurecía la página. La elegancia viene del trazo fino. */
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: -0.018em;
     text-wrap: balance;
-    /* `break-word` parte sólo cuando la palabra no cabe; `anywhere` cortaba
-       «Despertar Sencillo» en dos columnas angostas. */
     overflow-wrap: break-word;
     min-width: 0;
     margin: 0;
@@ -59,6 +60,10 @@
     display: block;
   }
 
+  figure {
+    margin: 0;
+  }
+
   button,
   input,
   select,
@@ -67,10 +72,9 @@
     color: inherit;
   }
 
-  /* Anillo de foco: aparece al instante, nunca se anima. */
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
     outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
+    outline-offset: 3px;
     border-radius: var(--radius-xs);
   }
 
@@ -83,7 +87,7 @@
 @layer components {
   .wrap {
     width: 100%;
-    max-width: 76rem;
+    max-width: 82rem;
     margin-inline: auto;
     padding-inline: var(--space-lg);
   }
@@ -94,32 +98,118 @@
     }
   }
 
-  .rule {
-    border: 0;
-    border-top: var(--rule-hair) solid var(--color-rule);
-    margin: 0;
-  }
-
-  .rule-thick {
-    border: 0;
-    border-top: var(--rule-thick) solid var(--color-ink);
-    margin: 0;
-  }
-
   .measure {
-    max-width: 62ch;
+    max-width: 58ch;
   }
 
   .nums {
     font-variant-numeric: tabular-nums;
   }
 
-  /* Texto clicable nunca parte en dos líneas. */
   .nowrap {
     white-space: nowrap;
   }
 
-  /* --------------------------------------------------------------- botones */
+  /* Versalitas de sistema: fecha, categoría, número de paso. El único
+     recurso tipográfico "de interfaz" que se permite a la vista. */
+  .label {
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    line-height: 1.4;
+  }
+
+  /* --------------------------------------------------------- superficies */
+
+  /* Panel mate. Sin contorno: se separa del fondo por tono, no por borde. */
+  .panel {
+    background: var(--color-paper);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .panel-flat {
+    background: var(--color-paper-2);
+    border-radius: var(--radius-md);
+  }
+
+  .panel-dark {
+    background: var(--color-espresso);
+    color: var(--color-paper);
+    border-radius: var(--radius-md);
+  }
+
+  /* Grano fílmico: da textura sin ensuciar. Va sobre foto y sobre oscuro. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------------------------------------------------------- fotografía */
+
+  /* Marco de imagen: recorte limpio, sin borde, con un fondo de espera
+     del mismo tono del papel para que no parpadee al cargar. */
+  .shot {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--color-paper-3);
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Velo para texto sobre foto. Dos degradados: uno desde abajo y otro desde
+     el borde donde vive el texto. Con uno solo, un titular claro sobre una
+     zona clara de la foto queda ilegible — y eso es un fallo de contraste,
+     no un matiz estético. */
+  .veil::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        to right,
+        oklch(18.5% 0.016 38 / 0.78) 0%,
+        oklch(18.5% 0.016 38 / 0.45) 38%,
+        transparent 72%
+      ),
+      linear-gradient(
+        to top,
+        oklch(18.5% 0.016 38 / 0.72) 0%,
+        oklch(18.5% 0.016 38 / 0.3) 45%,
+        transparent 80%
+      );
+  }
+
+  .veil-full::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: oklch(18.5% 0.016 38 / 0.42);
+  }
+
+  /* Zoom lento al pasar: el único gesto de las fotos. */
+  .shot-zoom img {
+    transition: transform 900ms var(--ease-out);
+  }
+
+  .group:hover .shot-zoom img {
+    transform: scale(1.035);
+  }
+
+  /* ------------------------------------------------------------ botones */
 
   .btn {
     display: inline-flex;
@@ -127,7 +217,7 @@
     justify-content: center;
     gap: var(--space-xs);
     white-space: nowrap;
-    padding: 0.7rem 1.35rem;
+    padding: 0.8rem 1.6rem;
     border-radius: var(--radius-pill);
     border: var(--rule-hair) solid transparent;
     font-weight: 500;
@@ -139,57 +229,54 @@
       background-color var(--dur-short) var(--ease-out),
       color var(--dur-short) var(--ease-out),
       border-color var(--dur-short) var(--ease-out),
-      transform var(--dur-instant) var(--ease-out);
-  }
-
-  .btn:active:not(:disabled) {
-    transform: translateY(1px);
+      opacity var(--dur-short) var(--ease-out);
   }
 
   .btn:disabled,
   .btn[aria-disabled="true"] {
-    opacity: 0.45;
+    opacity: 0.4;
     cursor: not-allowed;
   }
 
   .btn-primary {
-    background: var(--color-accent);
+    background: var(--color-ink-deep);
     color: var(--color-paper);
-    border-color: var(--color-ink);
-    border-width: var(--rule-firm);
-    box-shadow: var(--shadow-hard-sm);
   }
 
   .btn-primary:hover:not(:disabled) {
-    background: var(--color-accent-strong);
-    box-shadow: var(--shadow-hard);
+    background: var(--color-accent);
   }
 
-  .btn-primary:active:not(:disabled) {
-    box-shadow: none;
-  }
-
-  .btn-ink {
-    background: var(--color-ink-deep);
+  .btn-accent {
+    background: var(--color-accent);
     color: var(--color-paper);
-    border-color: var(--color-ink-deep);
-    border-width: var(--rule-firm);
   }
 
-  .btn-ink:hover:not(:disabled) {
-    background: var(--color-espresso-2);
+  .btn-accent:hover:not(:disabled) {
+    background: var(--color-accent-strong);
+  }
+
+  /* Botón sobre fotografía: contorno claro, relleno al pasar. */
+  .btn-onphoto {
+    background: transparent;
+    color: var(--color-paper);
+    border-color: oklch(97.5% 0.008 75 / 0.55);
+  }
+
+  .btn-onphoto:hover:not(:disabled) {
+    background: var(--color-paper);
+    color: var(--color-ink-deep);
+    border-color: var(--color-paper);
   }
 
   .btn-ghost {
     background: transparent;
     color: var(--color-ink);
     border-color: var(--color-rule);
-    border-width: var(--rule-firm);
   }
 
   .btn-ghost:hover:not(:disabled) {
     border-color: var(--color-ink);
-    background: var(--color-paper-2);
   }
 
   .btn-quiet {
@@ -203,16 +290,65 @@
     color: var(--color-accent-strong);
   }
 
-  /* Área táctil mínima de 44 px sin agrandar el botón visualmente. */
-  .tap::after {
-    content: "";
-    position: absolute;
-    inset: 50% 0 0 0;
-    min-height: 44px;
-    transform: translateY(-50%);
+  /* -------------------------------------------------------------- filtros */
+
+  /* Filtro tipográfico: subrayado, no cápsula rellena. */
+  .filter {
+    padding: 0.35rem 0;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color var(--dur-short) var(--ease-out),
+      border-color var(--dur-short) var(--ease-out);
   }
 
-  /* ---------------------------------------------------------------- campos */
+  .filter:hover {
+    color: var(--color-ink);
+  }
+
+  .filter[aria-pressed="true"] {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-accent);
+  }
+
+  /* Etiqueta de estado sobre foto o ficha. Sin relleno saturado. */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    background: oklch(97.5% 0.008 75 / 0.9);
+    color: var(--color-ink);
+    backdrop-filter: blur(6px);
+  }
+
+  .tag-accent {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  .tag-leaf {
+    background: var(--color-leaf-soft);
+    color: var(--color-leaf);
+  }
+
+  .tag-quiet {
+    background: transparent;
+    color: var(--color-muted);
+    padding-inline: 0;
+    backdrop-filter: none;
+  }
+
+  /* --------------------------------------------------------------- campos */
 
   .field {
     display: block;
@@ -221,167 +357,49 @@
   .field > span:first-child {
     display: block;
     font-size: var(--text-xs);
-    letter-spacing: 0.1em;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
     margin-bottom: var(--space-2xs);
   }
 
+  /* Campo con filete inferior: menos caja, más papel. */
   .input {
     width: 100%;
-    background: var(--color-paper);
-    border: var(--rule-hair) solid var(--color-rule);
-    border-radius: var(--radius-sm);
-    padding: 0.65rem 0.85rem;
+    background: transparent;
+    border: 0;
+    border-bottom: var(--rule-hair) solid var(--color-rule);
+    border-radius: 0;
+    padding: 0.55rem 0.1rem;
     transition: border-color var(--dur-short) var(--ease-out);
   }
 
   .input:hover {
-    border-color: var(--color-neutral);
+    border-bottom-color: var(--color-neutral);
+  }
+
+  .input:focus {
+    border-bottom-color: var(--color-ink);
   }
 
   .input[aria-invalid="true"] {
-    border-color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
   }
 
-  /* ------------------------------------------------------------- densidad */
-
-  /* Bloque del bento: borde firme, radio grande, recorta su contenido. */
-  .tile {
-    position: relative;
-    overflow: hidden;
-    border: var(--rule-firm) solid var(--color-ink);
-    border-radius: var(--radius-lg);
+  /* Variante encajonada para buscadores y campos sobre fondo tonal. */
+  .input-boxed {
     background: var(--color-paper);
-  }
-
-  .tile-dark {
-    background: var(--color-espresso);
-    color: var(--color-paper);
-    border-color: var(--color-ink-deep);
-  }
-
-  .tile-yolk {
-    background: var(--color-yolk);
-    color: var(--color-ink-deep);
-  }
-
-  .tile-accent {
-    background: var(--color-accent);
-    color: var(--color-paper);
-    border-color: var(--color-accent-strong);
-  }
-
-  /* Grano sobre las superficies oscuras: rompe el plano sin degradados. */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.055;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Etiqueta compacta: la unidad de información de las tarjetas densas. */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-pill);
-    font-size: var(--text-xs);
-    line-height: 1.5;
-    white-space: nowrap;
-    background: var(--color-paper-2);
-    color: var(--color-muted);
     border: var(--rule-hair) solid var(--color-rule);
-  }
-
-  .chip-accent {
-    background: var(--color-accent-soft);
-    color: var(--color-accent-strong);
-    border-color: transparent;
-  }
-
-  .chip-leaf {
-    background: var(--color-leaf-soft);
-    color: var(--color-leaf);
-    border-color: transparent;
-  }
-
-  .chip-solid {
-    background: var(--color-accent);
-    color: var(--color-paper);
-    border-color: transparent;
-  }
-
-  .chip-ink {
-    background: var(--color-ink-deep);
-    color: var(--color-paper);
-    border-color: transparent;
-  }
-
-  /* Botón de filtro / categoría. */
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 0.45rem 0.9rem;
     border-radius: var(--radius-pill);
-    border: var(--rule-firm) solid var(--color-rule);
-    background: var(--color-paper);
-    font-size: var(--text-sm);
-    white-space: nowrap;
-    cursor: pointer;
-    transition:
-      background-color var(--dur-short) var(--ease-out),
-      border-color var(--dur-short) var(--ease-out),
-      color var(--dur-short) var(--ease-out);
-  }
-
-  .pill:hover {
-    border-color: var(--color-ink);
-  }
-
-  .pill[aria-pressed="true"],
-  .pill[data-active="true"] {
-    background: var(--color-ink-deep);
-    border-color: var(--color-ink-deep);
-    color: var(--color-paper);
-  }
-
-  /* Carrusel horizontal con snap; en escritorio se convierte en rejilla. */
-  .rail {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(15rem, 1fr);
-    gap: var(--space-md);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: var(--space-xs);
-    scrollbar-width: thin;
-  }
-
-  .rail > * {
-    scroll-snap-align: start;
-  }
-
-  /* Barra de acciones pegada al pie en móvil. */
-  .dock {
-    position: sticky;
-    bottom: 0;
-    z-index: var(--z-sticky);
-    border-top: var(--rule-firm) solid var(--color-ink);
-    background: color-mix(in oklab, var(--color-paper) 94%, transparent);
-    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
   }
 
   /* ----------------------------------------------------------------- link */
 
   .link {
-    color: var(--color-ink);
+    color: inherit;
     text-decoration: none;
-    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
     background-position: 0 100%;
     background-repeat: no-repeat;
@@ -391,14 +409,38 @@
   .link:hover {
     background-size: 100% 1px;
   }
+
+  /* Rieles horizontales con imán, para carruseles de fotos. */
+  .rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(16rem, 1fr);
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+  }
+
+  .dock {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--color-paper) 92%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -1px 0 var(--color-rule);
+  }
 }
 
 @layer utilities {
-  /* Una sola entrada orquestada en la carga; nada de fade-up por sección. */
+  /* Entrada única al cargar. */
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translate3d(0, 14px, 0);
+      transform: translate3d(0, 18px, 0);
     }
     to {
       opacity: 1;
@@ -408,6 +450,26 @@
 
   .rise {
     animation: rise var(--dur-long) var(--ease-out) both;
+  }
+
+  /* Revelado al entrar en pantalla. El bloque es visible por defecto y sólo
+     se oculta cuando el JS lo «arma» (data-armed), es decir cuando confirmó
+     que está fuera de la ventana y que hay IntersectionObserver. Así ningún
+     fallo del observador puede dejar la página en blanco. */
+  .reveal {
+    transition:
+      opacity var(--dur-long) var(--ease-out),
+      transform var(--dur-long) var(--ease-out);
+  }
+
+  .reveal[data-armed="true"] {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  .reveal[data-armed="true"][data-shown="true"] {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -426,5 +488,16 @@
 
   .rise {
     animation: none;
+  }
+
+  .reveal,
+  .reveal[data-armed="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .shot-zoom img,
+  .group:hover .shot-zoom img {
+    transform: none;
   }
 }

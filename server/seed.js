@@ -288,9 +288,9 @@ const settings = {
   hero: {
     title: 'Llega antes que la alarma.',
     subtitle:
-      'Desayunos sorpresa armados a las 4 de la mañana y entregados en la puerta, con la hora que vos elegís y una tarjeta escrita a mano.',
+      'Se arman a las cuatro de la mañana y llegan a la puerta con la hora que vos elegís, una tarjeta escrita a mano y flores si querés.',
     ctaLabel: 'Ver los desayunos',
-    image: img('waffles-frutas'),
+    image: img('cama-lilas'),
   },
   sections: {
     bestsellers: true,

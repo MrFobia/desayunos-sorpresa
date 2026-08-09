@@ -1,52 +1,57 @@
-/* Hallmark · genre: editorial · macrostructure: Bento Grid · theme: Atelier (warm, high-contrast v2)
- * enrichment: E-interactive WebGL fruit bowl (drag-to-rotate) · nav: N11 mega-menú · footer: Ft4 colofón denso
- * anchor hue: 45 (crema/durazno) · accent: fresa oklch(54% 0.18 25) · secondary: hoja oklch(50% 0.09 145)
- * Hallmark · pre-emit critique: P5 H5 E5 S5 R4 V5
+/* Hallmark · genre: editorial · macrostructure: Photographic · theme: custom «quiet luxury cálido»
+ * enrichment: fotografía a sangre + escena WebGL secundaria · nav: N9 borde alineado · footer: Ft4 colofón
+ * Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5
  *
- * v2 (07-ago-2026): sube la densidad y el contraste. Agrega superficies oscuras
- * cálidas para bloques de color, sombra dura desplazada en lugar de blur suave,
- * y bordes definidos. Reemplaza la versión editorial de mucho aire.
+ * v3 (07-ago-2026) — corrige el rumbo de la v2, que leía como caricatura.
+ * Fuera: borde negro de 1,5 px, sombra dura desplazada, amarillo yema saturado,
+ * radios de 20 px. La v2 era neobrutalismo de 2022 y para un regalo de día
+ * especial se sentía infantil.
  *
- * Fuente única de verdad del sistema: color, tipografía, escala, motion.
- * Se declara con `@theme static` para que Tailwind v4 genere utilidades
- * (`bg-paper`, `text-ink`, `font-display`) y además emita todas las variables
- * en :root, de modo que `var(--color-accent)` funcione en CSS a mano.
- * Ningún color ni familia tipográfica se escribe fuera de este archivo.
+ * Ahora: la fotografía manda y la interfaz desaparece. Superficies mate en
+ * hueso y lino, filetes casi invisibles en vez de bordes, sombras muy difusas
+ * o ninguna, radios de 2–4 px, y un solo acento vino apagado. La textura la
+ * pone un grano fílmico sutil, no el contorno.
+ *
+ * Se declara con `@theme static` para que Tailwind v4 genere utilidades y
+ * emita las variables en :root. Ningún color ni familia tipográfica se
+ * escribe fuera de este archivo.
  */
 
 @theme static {
-  /* --- papel / tinta ---------------------------------------------------- */
-  --color-paper: oklch(97% 0.014 70);
-  --color-paper-2: oklch(94.5% 0.018 65);
-  --color-paper-3: oklch(91% 0.026 60);
-  --color-rule: oklch(85% 0.022 55);
-  --color-neutral: oklch(60% 0.022 50);
-  --color-muted: oklch(45% 0.022 45);
-  --color-ink: oklch(24% 0.022 40);
-  --color-ink-deep: oklch(16% 0.02 35);
+  /* --- superficies: hueso, lino, arcilla ------------------------------- */
+  --color-paper: oklch(97.5% 0.008 75);
+  --color-paper-2: oklch(95% 0.011 72);
+  --color-paper-3: oklch(91.5% 0.014 68);
+  --color-linen: oklch(88% 0.017 65);
 
-  /* --- superficies oscuras para bloques de color ------------------------ */
-  --color-espresso: oklch(21% 0.032 42);
-  --color-espresso-2: oklch(27% 0.036 44);
+  /* Filete de separación: se intuye, no se ve. Nunca un borde de contorno. */
+  --color-rule: oklch(88% 0.012 62);
+  --color-rule-soft: oklch(92% 0.009 65);
 
-  /* --- acentos ---------------------------------------------------------- */
-  --color-accent: oklch(54% 0.18 25); /* fresa — enlaces, CTA, estados activos */
-  --color-accent-strong: oklch(46% 0.17 25);
-  --color-accent-soft: oklch(90% 0.045 25);
-  --color-leaf: oklch(50% 0.09 145); /* hoja — sólo etiquetas saludables */
-  --color-leaf-soft: oklch(93% 0.03 145);
-  --color-focus: oklch(50% 0.19 25);
+  --color-neutral: oklch(62% 0.014 55);
+  --color-muted: oklch(48% 0.016 48);
+  --color-ink: oklch(27% 0.018 42);
+  --color-ink-deep: oklch(18.5% 0.016 38);
 
-  /* Amarillo yema: superficie, nunca texto ni enlace. Sirve para pintar un
-     bloque entero del bento; por eso no cuenta como tercer acento tipográfico. */
-  --color-yolk: oklch(84% 0.14 85);
-  --color-yolk-deep: oklch(74% 0.15 78);
+  /* --- superficies oscuras: cacao, no negro ---------------------------- */
+  --color-espresso: oklch(23% 0.022 40);
+  --color-espresso-2: oklch(31% 0.024 42);
 
-  /* --- tipografía ------------------------------------------------------- */
+  /* --- acento único: vino apagado -------------------------------------- */
+  --color-accent: oklch(43% 0.115 22);
+  --color-accent-strong: oklch(36% 0.105 22);
+  --color-accent-soft: oklch(93% 0.022 22);
+  --color-focus: oklch(43% 0.13 22);
+
+  /* Verde salvia para etiquetas saludables: apagado, nunca vivo. */
+  --color-leaf: oklch(48% 0.045 150);
+  --color-leaf-soft: oklch(94% 0.014 150);
+
+  /* --- tipografía ------------------------------------------------------ */
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
 
-  --text-xs: 0.78rem;
+  --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-md: 1.125rem;
@@ -55,33 +60,36 @@
   --text-2xl: 2.25rem;
   --text-3xl: 2.9rem;
   --text-4xl: 3.6rem;
-  --text-display-s: clamp(2.25rem, 4vw + 0.75rem, 3.6rem);
-  --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-display-s: clamp(2.1rem, 3.6vw + 0.75rem, 3.4rem);
+  --text-display: clamp(2.6rem, 4.6vw + 1rem, 5rem);
 
-  /* --- espacio (escala 4 pt) -------------------------------------------- */
+  /* Interlínea del display: aire, no compresión. */
+  --leading-display: 1.04;
+
+  /* Etiquetas versalitas: el único recurso «de sistema» a la vista. */
+  --tracking-label: 0.16em;
+
+  /* --- espacio (escala 4 pt, más generosa que la v2) -------------------- */
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2.25rem;
-  --space-2xl: 3.5rem;
-  --space-3xl: 5.5rem;
-  --space-4xl: 8rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6.5rem;
+  --space-4xl: 9rem;
 
-  /* --- reglas, radios, capas -------------------------------------------- */
+  /* --- filetes, radios, capas ------------------------------------------ */
   --rule-hair: 1px;
-  --rule-firm: 1.5px;
-  --rule-thick: 3px;
   --radius-xs: 2px;
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
   --radius-pill: 999px;
 
-  /* Sombra dura desplazada: da peso sin el desenfoque genérico. */
-  --shadow-hard: 4px 4px 0 var(--color-ink);
-  --shadow-hard-sm: 2px 2px 0 var(--color-ink);
+  /* Sombras difusas y bajas: elevación apenas perceptible. */
+  --shadow-soft: 0 1px 2px oklch(20% 0.02 40 / 0.04), 0 8px 24px oklch(20% 0.02 40 / 0.06);
+  --shadow-lift: 0 2px 6px oklch(20% 0.02 40 / 0.06), 0 18px 44px oklch(20% 0.02 40 / 0.1);
 
   --z-base: 0;
   --z-raised: 10;
@@ -90,12 +98,12 @@
   --z-modal: 40;
   --z-toast: 50;
 
-  /* --- motion ----------------------------------------------------------- */
+  /* --- motion ---------------------------------------------------------- */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-instant: 90ms;
-  --dur-short: 160ms;
-  --dur-mid: 280ms;
-  --dur-long: 480ms;
+  --dur-short: 200ms;
+  --dur-mid: 340ms;
+  --dur-long: 620ms;
 }

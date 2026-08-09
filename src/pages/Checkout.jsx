@@ -78,7 +78,7 @@ export default function Checkout() {
 
   return (
     <div className="wrap py-8 md:py-12">
-      <div className="tile tile-dark grain px-6 py-7 md:px-8">
+      <div className="panel-dark grain relative px-6 py-7 md:px-8">
         <h1 className="text-3xl md:text-4xl">Confirmá el pedido</h1>
         <p className="mt-2 text-sm opacity-80">
           Pago contra entrega o por transferencia. No pedimos datos de tarjeta.
@@ -89,7 +89,7 @@ export default function Checkout() {
         {/* ------------------------------------------------------ formulario */}
         <form onSubmit={submitOrder}>
           {!user && (
-            <section className="tile p-5" style={{ background: 'var(--color-paper-2)' }}>
+            <section className="panel p-5" style={{ background: 'var(--color-paper-2)' }}>
               <h2 className="text-lg">¿Con cuenta o sin cuenta?</h2>
               <p className="mt-1 text-sm text-muted">
                 Podés pedir sin registrarte. Si creás una cuenta, tu primer pedido lleva{' '}
@@ -104,7 +104,7 @@ export default function Checkout() {
                   <button
                     key={option.id}
                     type="button"
-                    className="pill"
+                    className="filter"
                     aria-pressed={mode === option.id}
                     onClick={() => setMode(option.id)}
                   >
@@ -147,7 +147,7 @@ export default function Checkout() {
           )}
 
           {user && (
-            <p className="tile p-4 text-sm" style={{ background: 'var(--color-paper-2)' }}>
+            <p className="panel p-4 text-sm" style={{ background: 'var(--color-paper-2)' }}>
               Entrando como <strong>{user.name}</strong>.{' '}
               {!user.firstOrderUsed && (
                 <span style={{ color: 'var(--color-accent)' }}>
@@ -227,7 +227,7 @@ export default function Checkout() {
         </form>
 
         {/* --------------------------------------------------------- resumen */}
-        <aside className="tile self-start p-5 lg:sticky lg:top-24" style={{ background: 'var(--color-paper-2)' }}>
+        <aside className="panel self-start p-5 lg:sticky lg:top-24" style={{ background: 'var(--color-paper-2)' }}>
           <h2 className="text-xl">Tu pedido</h2>
           <ul className="mt-4 divide-y divide-rule border-y border-rule">
             {cart.map((line) => (

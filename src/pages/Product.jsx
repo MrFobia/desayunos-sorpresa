@@ -113,26 +113,25 @@ export default function Product() {
           <span>{product.name}</span>
         </nav>
 
-        <div className="grid gap-3 md:grid-cols-[1fr_minmax(0,18rem)]">
-          <div className="tile relative aspect-4/3 md:aspect-16/11" style={{ background: 'var(--color-paper-3)' }}>
+        <div className="grid gap-3 md:grid-cols-[1fr_minmax(0,16rem)]">
+          <div className="shot relative aspect-4/3 md:aspect-16/11">
             <img
               src={product.images[activeImage]}
               alt={`${product.name} — foto ${activeImage + 1}`}
               width="1400"
               height="960"
               fetchPriority="high"
-              className="h-full w-full object-cover"
             />
             <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
               {product.compareAt > product.price && (
-                <span className="chip chip-solid nums">
+                <span className="tag tag-accent nums">
                   −{Math.round((1 - product.price / product.compareAt) * 100)} %
                 </span>
               )}
               {product.badges?.map((badge) => (
                 <span
                   key={badge}
-                  className={`chip ${badge === 'Sin azúcar añadida' ? 'chip-leaf' : 'chip-ink'}`}
+                  className={`tag ${badge === 'Sin azúcar añadida' ? 'tag-leaf' : ''}`}
                 >
                   {badge}
                 </span>
@@ -147,13 +146,14 @@ export default function Product() {
                 aria-label={`Ver foto ${i + 1}`}
                 aria-pressed={activeImage === i}
                 onClick={() => setActiveImage(i)}
-                className="tile aspect-4/3 transition-all duration-150"
+                className="shot aspect-4/3 transition-opacity duration-200"
                 style={{
-                  borderColor: activeImage === i ? 'var(--color-accent)' : 'var(--color-rule)',
-                  opacity: activeImage === i ? 1 : 0.72,
+                  opacity: activeImage === i ? 1 : 0.55,
+                  outline: activeImage === i ? '1px solid var(--color-ink)' : 'none',
+                  outlineOffset: '2px',
                 }}
               >
-                <img src={src} alt="" loading="lazy" width="320" height="240" className="h-full w-full object-cover" />
+                <img src={src} alt="" loading="lazy" width="320" height="240" />
               </button>
             ))}
           </div>
@@ -163,13 +163,18 @@ export default function Product() {
       <section className="wrap grid gap-10 py-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
         {/* --------------------------------------------------- columna izquierda */}
         <div>
-          <p className="flex flex-wrap gap-1.5">
-            <span className="chip">{categoryLabel(product.category)}</span>
-            <span className="chip">
-              {product.serves === 1 ? 'Para una persona' : `Para ${product.serves} personas`}
-            </span>
-            <span className="chip">{product.includes.length} cosas dentro</span>
-            {product.sold > 0 && <span className="chip chip-accent nums">{product.sold} pedidos</span>}
+          <p className="label flex flex-wrap items-center gap-x-2.5 gap-y-1">
+            <span>{categoryLabel(product.category)}</span>
+            <span aria-hidden="true">·</span>
+            <span>{product.serves === 1 ? 'para una persona' : `para ${product.serves} personas`}</span>
+            <span aria-hidden="true">·</span>
+            <span>{product.includes.length} cosas dentro</span>
+            {product.sold > 0 && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span className="nums">{product.sold} pedidos</span>
+              </>
+            )}
           </p>
           <h1 className="mt-3" style={{ fontSize: 'var(--text-display-s)' }}>
             {product.name}
@@ -180,7 +185,7 @@ export default function Product() {
           <p className="mt-1 text-sm text-muted">
             Destildá lo que no quieras. El precio no cambia, pero la caja sí.
           </p>
-          <ul className="tile mt-4 divide-y divide-rule">
+          <ul className="mt-5 divide-y divide-rule border-y border-rule">
             {product.includes.map((item) => {
               const off = removed.includes(item.name);
               return (
@@ -214,10 +219,11 @@ export default function Product() {
               return (
                 <label
                   key={addon.id}
-                  className="tile flex cursor-pointer items-center gap-3 p-3 transition-colors duration-150"
+                  className="flex cursor-pointer items-center gap-3 border p-3.5 transition-colors duration-200"
                   style={{
-                    borderColor: on ? 'var(--color-accent)' : 'var(--color-rule)',
-                    background: on ? 'var(--color-accent-soft)' : 'var(--color-paper)',
+                    borderColor: on ? 'var(--color-ink)' : 'var(--color-rule)',
+                    background: on ? 'var(--color-paper-2)' : 'transparent',
+                    borderRadius: 'var(--radius-sm)',
                   }}
                 >
                   <input
@@ -241,7 +247,7 @@ export default function Product() {
         {/* --------------------------------------------------- configurador */}
         {/* pb-20 en móvil: deja aire para que la barra fija no tape el botón */}
         <form onSubmit={onSubmit} ref={configRef} className="pb-20 lg:sticky lg:top-24 lg:self-start lg:pb-0">
-          <div className="tile p-5" style={{ background: 'var(--color-paper-2)' }}>
+          <div className="panel-flat p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
               <p className="nums font-display text-3xl">
                 {product.compareAt > product.price && (
@@ -396,17 +402,17 @@ export default function Product() {
       {/* Reseñas: se muestran sólo si el panel cargó opiniones reales.
           Sin reseñas no hay estrellas — no se inventa una valoración. */}
       {reviews.length > 0 && (
-        <section className="border-t border-rule bg-paper-2">
+        <section style={{ background: 'var(--color-paper-2)' }}>
           <div className="wrap py-12">
             <div className="flex flex-wrap items-baseline gap-3">
               <h2 className="text-2xl">Lo que dijeron</h2>
-              <span className="chip nums">
+              <span className="tag nums">
                 ★ {average} · {reviews.length} {reviews.length === 1 ? 'reseña' : 'reseñas'}
               </span>
             </div>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {reviews.slice(0, 6).map((review, i) => (
-                <blockquote key={i} className="tile p-4">
+                <blockquote key={i} className="panel-flat p-5">
                   <p className="nums text-sm" style={{ color: 'var(--color-accent)' }}>
                     {'★'.repeat(Math.round(Number(review.rating) || 0))}
                   </p>

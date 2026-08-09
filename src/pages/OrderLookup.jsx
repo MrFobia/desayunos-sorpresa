@@ -33,7 +33,7 @@ export default function OrderLookup() {
 
   return (
     <div className="wrap py-8 md:py-12">
-      <div className="tile tile-dark grain px-6 py-8 md:px-8">
+      <div className="panel-dark grain relative px-6 py-8 md:px-8">
         <h1 className="text-3xl md:text-4xl">Seguir un pedido</h1>
         <p className="measure mt-2 opacity-85">
           Escribí el código que te dimos al confirmar. Tiene la forma AUR-XXXXXX.

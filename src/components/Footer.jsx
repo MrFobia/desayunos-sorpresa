@@ -14,7 +14,7 @@ export default function Footer() {
   const categories = [...new Set(products.map((p) => p.category))];
 
   return (
-    <footer className="tile-dark grain relative mt-16 border-0">
+    <footer className="panel-dark grain relative relative mt-16 border-0">
       <div className="relative">
         {settings?.sections?.newsletter !== false && (
           <section className="wrap grid gap-8 border-b py-12 md:grid-cols-[1.1fr_1fr] md:items-end"

@@ -9,23 +9,24 @@ export default function Catalog() {
   const category = params.get('c');
 
   return (
-    <div className="wrap py-8 md:py-12">
-      <div className="tile tile-dark grain relative px-6 py-8 md:px-8 md:py-10">
-        <h1 className="text-3xl md:text-4xl">
-          {category ? categoryLabel(category) : 'La carta'}
+    <div className="wrap py-10 md:py-16">
+      <header className="max-w-2xl">
+        <p className="label">La carta</p>
+        <h1 className="mt-3" style={{ fontSize: 'var(--text-display-s)' }}>
+          {category ? categoryLabel(category) : 'Ocho cajas, ocho mañanas'}
         </h1>
-        <p className="measure mt-2 opacity-85">
+        <p className="measure mt-4 text-md text-muted">
           {category
             ? `Los desayunos de la categoría ${categoryLabel(category).toLowerCase()}.`
-            : 'Ocho desayunos. Quitá lo que no va, sumá adicionales y elegí día y hora.'}
+            : 'Quitá lo que no va, sumá adicionales y elegí el día y la hora en que llega.'}
         </p>
-      </div>
+      </header>
 
-      <div className="mt-7">
+      <div className="mt-10 md:mt-14">
         {loading ? (
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4" aria-busy="true">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 lg:grid-cols-4" aria-busy="true">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <div key={i} className="aspect-3/4 rounded-lg" style={{ background: 'var(--color-paper-3)' }} />
+              <div key={i} className="shot aspect-3/4" />
             ))}
           </div>
         ) : (
