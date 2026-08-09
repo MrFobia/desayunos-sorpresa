@@ -12,12 +12,10 @@ directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
 
-# Base D1. `database_id` se completa al crearla:
-#   npx wrangler d1 create desayunos-sorpresa
 [[d1_databases]]
 binding = "DB"
 database_name = "desayunos-sorpresa"
-database_id = "PENDIENTE_DE_CREAR"
+database_id = "048226e7-ef12-4af2-9b70-eadd651906cb"
 migrations_dir = "migrations"
 
 [observability]
