@@ -25,33 +25,43 @@ Para ver el sitio tal como queda publicado (Worker sirviendo también los estát
 npm run preview        # compila y sirve todo desde :8787
 ```
 
-Panel: `/admin` · contraseña por defecto `aurora2026`.
+Panel: `/admin`. En local la contraseña es `aurora2026` (el valor por defecto del
+código); en producción manda el secreto `ADMIN_PASSWORD`, que es distinto.
 
-## Desplegar en Cloudflare
+## En producción
 
-Sólo la primera vez:
+**https://desayunos-sorpresa.nbdesigner23.workers.dev**
+
+La base D1 `desayunos-sorpresa` ya existe, con las migraciones aplicadas y la carta
+cargada. Los secretos `ADMIN_PASSWORD` y `SESSION_SECRET` están configurados en el
+Worker, así que la contraseña por defecto del código no sirve en producción.
+
+Para publicar cambios:
 
 ```bash
-npx wrangler login
-npx wrangler d1 create desayunos-sorpresa
-```
-
-El segundo comando imprime un `database_id`. Copialo a `wrangler.toml`, en el bloque
-`[[d1_databases]]`, reemplazando `PENDIENTE_DE_CREAR`. Después:
-
-```bash
-npm run db:migrate:remote                 # crea las tablas y carga la carta
-npx wrangler secret put ADMIN_PASSWORD    # contraseña del panel
-npx wrangler secret put SESSION_SECRET    # cadena larga y aleatoria
 npm run deploy
 ```
 
-**Poné los dos secretos antes de abrir el sitio.** Sin `ADMIN_PASSWORD` el panel queda
-con la contraseña por defecto, que está a la vista en este repositorio público. Para
-`SESSION_SECRET` sirve cualquier cadena larga (`openssl rand -base64 32`).
+Con el proyecto conectado a GitHub, Cloudflare también corre `npm run build` y
+`npx wrangler deploy` en cada push a `main`.
 
-Con el proyecto conectado a GitHub, Cloudflare corre `npm run build` y `npx wrangler
-deploy` en cada push a `main`.
+Si cambiás el esquema, agregá una migración nueva en `migrations/` y aplicala:
+
+```bash
+npm run db:migrate          # local
+npm run db:migrate:remote   # producción
+```
+
+### Si hay que rearmar todo desde cero
+
+```bash
+npx wrangler login
+npx wrangler d1 create desayunos-sorpresa   # copiar el database_id a wrangler.toml
+npm run db:migrate:remote
+openssl rand -base64 32 | npx wrangler secret put SESSION_SECRET
+npx wrangler secret put ADMIN_PASSWORD
+npm run deploy
+```
 
 ## Rutas
 
