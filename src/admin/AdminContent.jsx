@@ -65,7 +65,7 @@ export default function AdminContent() {
           <Field label="Ciudad">
             <input className="input" value={settings.brand.city} onChange={(e) => patch('brand.city', e.target.value)} />
           </Field>
-          <Field label="WhatsApp" hint="Sólo números, con indicativo. Ej: 573001234567">
+          <Field label="WhatsApp" hint="Solo números, con indicativo. Ej: 573001234567">
             <input className="input nums" value={settings.brand.whatsapp} onChange={(e) => patch('brand.whatsapp', e.target.value)} />
           </Field>
         </div>

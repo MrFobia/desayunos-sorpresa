@@ -49,7 +49,7 @@ export default function CartDrawer({ open, onClose }) {
 
         {cart.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <p className="text-muted">Todavía no hay desayunos acá.</p>
+            <p className="text-muted">Todavía no hay desayunos aquí.</p>
             <Link to="/desayunos" className="btn btn-primary" onClick={onClose}>
               Ver la carta
             </Link>
@@ -140,7 +140,7 @@ export default function CartDrawer({ open, onClose }) {
               {!user && (
                 <p className="mt-2 text-xs text-muted">
                   <Link to="/cuenta" className="link" onClick={onClose}>
-                    Creá una cuenta
+                    Crea una cuenta
                   </Link>{' '}
                   y tu primer pedido lleva {settings?.discountFirstOrder} % menos.
                 </p>

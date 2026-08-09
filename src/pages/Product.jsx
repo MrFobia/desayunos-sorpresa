@@ -183,7 +183,7 @@ export default function Product() {
 
           <h2 className="mt-10 text-xl">Qué trae la caja</h2>
           <p className="mt-1 text-sm text-muted">
-            Destildá lo que no quieras. El precio no cambia, pero la caja sí.
+            Desmarca lo que no quieras. El precio no cambia, pero la caja sí.
           </p>
           <ul className="mt-5 divide-y divide-rule border-y border-rule">
             {product.includes.map((item) => {
@@ -212,7 +212,7 @@ export default function Product() {
           </ul>
           <p className="mt-3 text-sm text-muted">{product.prepNote}</p>
 
-          <h2 className="mt-12 text-xl">Sumale algo</h2>
+          <h2 className="mt-12 text-xl">Agrégale algo</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {[...foodAddons, ...detailAddons].map((addon) => {
               const on = chosenAddons.includes(addon.id);
@@ -283,7 +283,7 @@ export default function Product() {
                   aria-invalid={touched && !slot}
                   onChange={(e) => setSlot(e.target.value)}
                 >
-                  <option value="">Elegí una hora</option>
+                  <option value="">Elige una hora</option>
                   {settings?.delivery?.slots?.map((s) => (
                     <option key={s} value={s}>
                       {s}

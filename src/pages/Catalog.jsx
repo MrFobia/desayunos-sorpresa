@@ -18,7 +18,7 @@ export default function Catalog() {
         <p className="measure mt-4 text-md text-muted">
           {category
             ? `Los desayunos de la categoría ${categoryLabel(category).toLowerCase()}.`
-            : 'Quitá lo que no va, sumá adicionales y elegí el día y la hora en que llega.'}
+            : 'Quita lo que no va, suma adicionales y elige el día y la hora en que llega.'}
         </p>
       </header>
 

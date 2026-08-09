@@ -55,7 +55,7 @@ export default function Account() {
     <div className="wrap py-14">
       <h1 className="text-4xl">{mode === 'registro' ? 'Crear cuenta' : 'Ingresar'}</h1>
       <p className="measure mt-3 text-muted">
-        La cuenta es opcional: podés pedir sin registrarte. Sirve para guardar tus datos y para el{' '}
+        La cuenta es opcional: puedes pedir sin registrarte. Sirve para guardar tus datos y para el{' '}
         {settings?.discountFirstOrder} % del primer pedido.
       </p>
 

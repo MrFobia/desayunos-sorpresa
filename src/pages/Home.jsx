@@ -46,7 +46,7 @@ export default function Home() {
         <h1 className="text-2xl">No pudimos cargar la carta</h1>
         <p className="mt-3 text-muted">{error}</p>
         <p className="mt-1 text-sm text-muted">
-          Revisá que la API esté corriendo: <code>npm run dev</code> levanta las dos partes.
+          Revisa que la API esté corriendo: <code>npm run dev</code> levanta las dos partes.
         </p>
       </div>
     );
@@ -164,8 +164,8 @@ export default function Home() {
             <h2 className="mt-3 text-3xl md:text-4xl">Tres pasos y listo</h2>
             <ol className="mt-8 divide-y" style={{ borderColor: 'var(--color-rule)' }}>
               {[
-                ['01', 'Elegís la caja', 'Quitá lo que no va y sumá adicionales.'],
-                ['02', 'Ponés día y hora', settings?.delivery?.cutoffNote || ''],
+                ['01', 'Eliges la caja', 'Quita lo que no va y suma adicionales.'],
+                ['02', 'Pones día y hora', settings?.delivery?.cutoffNote || ''],
                 ['03', 'Llega y avisamos', 'Te escribimos cuando sale el domiciliario.'],
               ].map(([n, title, body]) => (
                 <li key={n} className="flex gap-5 py-5 first:pt-0" style={{ borderColor: 'var(--color-rule)' }}>
@@ -252,7 +252,7 @@ export default function Home() {
               <h2 className="mt-3 text-3xl md:text-4xl">Lo que entra en el bol cambia cada semana</h2>
               <p className="measure mt-4 text-muted">
                 Compramos en plaza el mismo día. Si el kiwi no está bueno, no va: entra lo que sí.
-                Movelo con el mouse para verlo de cerca.
+                Muévelo con el mouse para verlo de cerca.
               </p>
             </Reveal>
             <div className="aspect-4/3">

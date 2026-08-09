@@ -41,11 +41,11 @@ export default function ThankYou() {
           Gracias, {order.customer.name.split(' ')[0]}.
         </h1>
         <p className="measure mt-4 opacity-85">
-          Guardá el código{' '}
+          Guarda el código{' '}
           <strong className="nums" style={{ color: 'var(--color-paper)' }}>
             {order.code}
           </strong>
-          . Con él podés ver el estado del pedido cuando quieras. Te escribimos por WhatsApp al{' '}
+          . Con él puedes ver el estado del pedido cuando quieras. Te escribimos por WhatsApp al{' '}
           {order.customer.phone} para confirmar el pago y la entrega.
         </p>
 

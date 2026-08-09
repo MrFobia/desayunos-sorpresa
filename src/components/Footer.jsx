@@ -32,7 +32,7 @@ export default function Footer() {
             <p className="font-display text-xl">{brand?.name}</p>
             <p className="mt-2 text-sm opacity-70">{brand?.tagline}</p>
             <a className="link mt-4 inline-block text-sm" style={{ color: 'var(--color-paper)' }} href={`https://wa.me/${brand?.whatsapp}`}>
-              Escribinos por WhatsApp
+              Escríbenos por WhatsApp
             </a>
           </div>
 

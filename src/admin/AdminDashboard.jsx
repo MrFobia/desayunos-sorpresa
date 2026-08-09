@@ -26,7 +26,7 @@ export default function AdminDashboard() {
   return (
     <div>
       <h1 className="text-3xl">Resumen</h1>
-      <p className="mt-2 text-muted">Todo lo que cambies acá se refleja en el sitio al instante.</p>
+      <p className="mt-2 text-muted">Todo lo que cambies aquí se refleja en el sitio al instante.</p>
 
       <div className="mt-8 grid gap-px overflow-hidden rounded-sm sm:grid-cols-2 lg:grid-cols-3"
         style={{ background: 'var(--color-rule)' }}>
@@ -39,7 +39,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="mt-10 rounded-sm border border-rule bg-paper-2 p-5 text-sm">
-        <h2 className="text-lg">Qué se maneja desde acá</h2>
+        <h2 className="text-lg">Qué se maneja desde aquí</h2>
         <ul className="mt-3 space-y-1.5 text-muted">
           <li>
             <strong className="text-ink">Desayunos</strong> — precio, fotos, qué trae la caja,

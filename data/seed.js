@@ -7,7 +7,7 @@
  *
  * Este archivo no se ejecuta en producción: `npm run db:generate` lo traduce a
  * `migrations/0002_seed.sql`, que es lo que carga D1. Para cambiar la carta de
- * arranque se edita acá y se regenera la migración; una vez desplegado, el
+ * arranque se edita aquí y se regenera la migración; una vez desplegado, el
  * contenido se administra desde el panel.
  */
 
@@ -108,7 +108,7 @@ const products = [
     badges: ['Para niños'],
     featured: false,
     active: true,
-    prepNote: 'Contanos la edad en las notas del pedido y ajustamos la sorpresa.',
+    prepNote: 'Cuéntanos la edad en las notas del pedido y ajustamos la sorpresa.',
   },
   {
     id: 'p5',
@@ -265,7 +265,7 @@ const posts = [
     author: 'Equipo Aurora',
     date: '2026-06-30',
     published: true,
-    body: `«Feliz cumple, te quiero mucho» está bien. «Feliz cumple. Todavía me acuerdo del bus que perdimos en Villa de Leyva» es otra cosa.\n\nLa diferencia es la especificidad. Un detalle concreto convierte un mensaje genérico en algo que la persona guarda.\n\nTenés 300 caracteres en el configurador. Es suficiente para un recuerdo, un chiste interno o una frase que solo ustedes dos entienden. Usalos.`,
+    body: `«Feliz cumple, te quiero mucho» está bien. «Feliz cumple. Todavía me acuerdo del bus que perdimos en Villa de Leyva» es otra cosa.\n\nLa diferencia es la especificidad. Un detalle concreto convierte un mensaje genérico en algo que la persona guarda.\n\nTienes 300 caracteres en el configurador. Es suficiente para un recuerdo, un chiste interno o una frase que solo ustedes dos entienden. Úsalos.`,
   },
 ];
 
@@ -280,12 +280,12 @@ const settings = {
   },
   banner: {
     active: true,
-    text: 'Entregamos de 6:00 a. m. a 11:00 a. m. en Bogotá. Pedí hasta las 8:00 p. m. del día anterior.',
+    text: 'Entregamos de 6:00 a. m. a 11:00 a. m. en Bogotá. Recibimos pedidos hasta las 8:00 p. m. del día anterior.',
   },
   hero: {
     title: 'Llega antes que la alarma.',
     subtitle:
-      'Se arman a las cuatro de la mañana y llegan a la puerta con la hora que vos elegís, una tarjeta escrita a mano y flores si querés.',
+      'Se arman a las cuatro de la mañana y llegan a la puerta a la hora que elijas, con una tarjeta escrita a mano y flores si quieres.',
     ctaLabel: 'Ver los desayunos',
     image: img('cama-lilas'),
   },
@@ -312,7 +312,7 @@ const settings = {
   discountFirstOrder: 10,
   newsletter: {
     title: 'Una carta los viernes',
-    body: 'Escribimos una vez por semana: qué fruta está buena, qué caja nueva sale y un descuento cada tanto. Sin ruido.',
+    body: 'Escribimos una vez por semana: qué fruta está buena, qué caja nueva sale y de vez en cuando un descuento. Sin ruido.',
   },
 };
 

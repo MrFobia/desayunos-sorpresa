@@ -81,7 +81,7 @@ export function DangerDelete({ label, name, onConfirm }) {
   return (
     <div className="mt-2 rounded-sm border p-3" style={{ borderColor: 'var(--color-accent)' }}>
       <p className="text-sm">
-        Esto borra <strong>{name}</strong> para siempre. Escribí el nombre para confirmar.
+        Esto borra <strong>{name}</strong> para siempre. Escribe el nombre para confirmar.
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <input className="input max-w-xs" value={typed} onChange={(e) => setTyped(e.target.value)} />
@@ -136,7 +136,7 @@ export function ImagePicker({ media, value = [], onChange, single = false }) {
         })}
       </div>
       <p className="mt-2 text-xs text-muted">
-        Las imágenes salen de <code>public/img</code>. Copiá archivos nuevos ahí y aparecen acá.
+        Las imágenes salen de <code>public/img</code>. Copia archivos nuevos ahí y aparecen aquí.
       </p>
     </div>
   );

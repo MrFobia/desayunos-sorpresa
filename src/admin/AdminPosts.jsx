@@ -46,7 +46,7 @@ export default function AdminPosts() {
           <Field label="Título">
             <input className="input" required value={draft.title} onChange={set('title')} />
           </Field>
-          <Field label="Dirección web (slug)" hint="Se genera del título si lo dejás vacío.">
+          <Field label="Dirección web (slug)" hint="Se genera del título si lo dejas vacío.">
             <input className="input" value={draft.slug} onChange={set('slug')} />
           </Field>
           <Field label="Autor">

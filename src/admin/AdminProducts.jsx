@@ -158,13 +158,13 @@ function ProductEditor({ draft: initial, media, onCancel, onSave }) {
         <Field label="Nombre">
           <input className="input" required value={draft.name} onChange={set('name')} />
         </Field>
-        <Field label="Dirección web (slug)" hint="Se genera del nombre si lo dejás vacío.">
+        <Field label="Dirección web (slug)" hint="Se genera del nombre si lo dejas vacío.">
           <input className="input" value={draft.slug} onChange={set('slug')} placeholder="despertar-sencillo" />
         </Field>
         <Field label="Precio (COP)">
           <input className="input nums" type="number" min="0" step="1000" value={draft.price} onChange={set('price')} />
         </Field>
-        <Field label="Precio tachado" hint="Poné un valor mayor al precio para que aparezca en Ofertas.">
+        <Field label="Precio tachado" hint="Pon un valor mayor al precio para que aparezca en Ofertas.">
           <input
             className="input nums"
             type="number"

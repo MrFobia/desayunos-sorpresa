@@ -174,7 +174,7 @@ export default function CatalogGrid({ products, limit, showFilters = true }) {
 
       {filtered.length === 0 ? (
         <div className="panel p-10 text-center">
-          <p className="text-muted">Con esos filtros no queda nada. Probá con otro precio o tamaño.</p>
+          <p className="text-muted">Con esos filtros no queda nada. Prueba con otro precio o tamaño.</p>
           <button type="button" className="btn btn-ghost mt-4" onClick={clearAll}>
             Limpiar filtros
           </button>

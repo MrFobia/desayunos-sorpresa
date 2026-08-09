@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function NotFound() {
   return (
     <div className="wrap py-24">
-      <h1 style={{ fontSize: 'var(--text-display-s)' }}>Acá no hay desayuno.</h1>
+      <h1 style={{ fontSize: 'var(--text-display-s)' }}>Aquí no hay desayuno.</h1>
       <p className="measure mt-4 text-md text-muted">
         La página que buscabas no existe o cambió de dirección.
       </p>

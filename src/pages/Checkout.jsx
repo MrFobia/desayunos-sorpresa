@@ -24,7 +24,7 @@ export default function Checkout() {
     return (
       <div className="wrap py-24 text-center">
         <h1 className="text-3xl">El carrito está vacío</h1>
-        <p className="mt-3 text-muted">Elegí un desayuno y volvé por acá.</p>
+        <p className="mt-3 text-muted">Elige un desayuno y vuelve por aquí.</p>
         <Link to="/desayunos" className="btn btn-primary mt-6">
           Ver la carta
         </Link>
@@ -79,7 +79,7 @@ export default function Checkout() {
   return (
     <div className="wrap py-8 md:py-12">
       <div className="panel-dark grain relative px-6 py-7 md:px-8">
-        <h1 className="text-3xl md:text-4xl">Confirmá el pedido</h1>
+        <h1 className="text-3xl md:text-4xl">Confirma el pedido</h1>
         <p className="mt-2 text-sm opacity-80">
           Pago contra entrega o por transferencia. No pedimos datos de tarjeta.
         </p>
@@ -92,7 +92,7 @@ export default function Checkout() {
             <section className="panel p-5" style={{ background: 'var(--color-paper-2)' }}>
               <h2 className="text-lg">¿Con cuenta o sin cuenta?</h2>
               <p className="mt-1 text-sm text-muted">
-                Podés pedir sin registrarte. Si creás una cuenta, tu primer pedido lleva{' '}
+                Puedes pedir sin registrarte. Si creas una cuenta, tu primer pedido lleva{' '}
                 {settings?.discountFirstOrder} % menos.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -191,7 +191,7 @@ export default function Checkout() {
             <label className="field">
               <span>Ciudad</span>
               <select className="input" value={customer.city} onChange={set('city')}>
-                <option value="">Elegí</option>
+                <option value="">Elige</option>
                 {settings?.delivery?.cities?.map((c) => (
                   <option key={c} value={c}>
                     {c}

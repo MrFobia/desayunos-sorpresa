@@ -16,7 +16,7 @@ export default function OrderDetail({ order }) {
 
       {order.status === 'cancelado' ? (
         <p className="mt-4 text-sm" style={{ color: 'var(--color-accent)' }}>
-          Este pedido está cancelado. Si es un error, escribinos por WhatsApp.
+          Este pedido está cancelado. Si es un error, escríbenos por WhatsApp.
         </p>
       ) : (
         <ol className="mt-5 grid gap-2 sm:grid-cols-4">

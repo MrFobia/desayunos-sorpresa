@@ -262,7 +262,7 @@ export default function FruitScene() {
         className="pointer-events-none absolute bottom-2 right-2 rounded-pill px-3 py-1 text-xs"
         style={{ background: 'var(--color-paper)', color: 'var(--color-muted)' }}
       >
-        {hovered ? hovered : 'Arrastrá para girar el bol'}
+        {hovered ? hovered : 'Arrastra para girar el bol'}
       </p>
     </div>
   );
