@@ -1,7 +1,7 @@
 name = "desayunos-sorpresa"
 main = "worker/index.js"
 compatibility_date = "2026-07-01"
-compatibility_flags = ["nodejs_compat"]
+# Sin `nodejs_compat`: el Worker sólo usa WebCrypto y Hono, todo estándar.
 
 # El mismo Worker sirve la aplicación y la API. Los archivos de `dist` se
 # resuelven antes de llegar al código; `/api/*` no existe como archivo, así que
